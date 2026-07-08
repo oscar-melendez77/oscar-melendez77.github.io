@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Más Watts — Architecture</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0c0518;
+    --surface: #170a26;
+    --border: #2e1547;
+    --accent: #d946ef;
+    --accent2: #22d3ee;
+    --accent3: #a3e635;
+    --text: #e7d8f5;
+    --muted: #7a5f92;
+    --device: #d946ef;
+    --api: #22d3ee;
+    --plan: #a3e635;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--bg); color: var(--text); font-family: 'Syne', sans-serif; min-height: 100vh; overflow-x: hidden; }
+  body::before {
+    content: ''; position: fixed; inset: 0;
+    background-image:
+      linear-gradient(rgba(217,70,239,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(217,70,239,0.03) 1px, transparent 1px);
+    background-size: 40px 40px; pointer-events: none; z-index: 0;
+  }
+  .container { position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 48px 32px; }
+  .header { text-align: center; margin-bottom: 56px; animation: fadeDown 0.8s ease both; }
+  .logo-tag { display: inline-block; font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 4px; color: var(--accent); text-transform: uppercase; border: 1px solid var(--accent); padding: 4px 12px; margin-bottom: 20px; opacity: 0.85; }
+  h1 { font-size: clamp(36px, 6vw, 72px); font-weight: 800; line-height: 1; background: linear-gradient(135deg, #fff 0%, var(--accent) 55%, var(--accent2) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 12px; }
+  .subtitle { font-family: 'Space Mono', monospace; font-size: 13px; color: var(--muted); letter-spacing: 2px; }
+  .header-links { margin-top: 18px; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .header-links a { text-decoration: none; font-size: 13px; font-weight: 600; padding: 8px 18px; border-radius: 4px; color: var(--text); background: transparent; border: 1px solid var(--border); }
+  .legend { display: flex; gap: 24px; justify-content: center; margin-bottom: 48px; flex-wrap: wrap; animation: fadeUp 0.8s 0.2s ease both; }
+  .legend-item { display: flex; align-items: center; gap: 8px; font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 1px; }
+  .legend-dot { width: 10px; height: 10px; border-radius: 2px; }
+  .dot-device { background: var(--device); }
+  .dot-api { background: var(--api); }
+  .dot-plan { background: var(--plan); }
+  .arch { display: flex; flex-direction: column; gap: 3px; }
+  .layer { display: grid; grid-template-columns: 170px 1fr; gap: 3px; animation: fadeUp 0.6s ease both; }
+  .layer:nth-child(1){animation-delay:.1s}.layer:nth-child(2){animation-delay:.15s}.layer:nth-child(3){animation-delay:.2s}.layer:nth-child(4){animation-delay:.25s}.layer:nth-child(5){animation-delay:.3s}.layer:nth-child(6){animation-delay:.35s}.layer:nth-child(7){animation-delay:.4s}.layer:nth-child(8){animation-delay:.45s}.layer:nth-child(9){animation-delay:.5s}
+  .layer-label { background: var(--surface); border: 1px solid var(--border); display: flex; align-items: center; padding: 0 16px; font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 2px; color: var(--muted); text-transform: uppercase; }
+  .layer-content { display: flex; gap: 3px; flex-wrap: wrap; }
+  .tool { flex: 1; min-width: 150px; background: var(--surface); border: 1px solid var(--border); padding: 16px 20px; position: relative; transition: all 0.25s ease; overflow: hidden; }
+  .tool::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; }
+  .tool.device::before { background: var(--device); }
+  .tool.api::before { background: var(--api); }
+  .tool.plan::before { background: var(--plan); }
+  .tool:hover { border-color: var(--accent); transform: translateY(-2px); background: #1e0d33; }
+  .tool-name { font-weight: 800; font-size: 15px; color: #fff; margin-bottom: 4px; }
+  .tool-role { font-family: 'Space Mono', monospace; font-size: 10px; color: var(--muted); letter-spacing: 0.3px; line-height: 1.55; }
+  .tool-badge { position: absolute; top: 12px; right: 12px; font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 1px; padding: 2px 7px; border-radius: 2px; text-transform: uppercase; }
+  .badge-device { background: rgba(217,70,239,0.1); color: var(--device); border: 1px solid rgba(217,70,239,0.3); }
+  .badge-api { background: rgba(34,211,238,0.1); color: var(--api); border: 1px solid rgba(34,211,238,0.3); }
+  .badge-plan { background: rgba(163,230,53,0.1); color: var(--plan); border: 1px solid rgba(163,230,53,0.3); animation: pulse 2s infinite; }
+  .section { margin-top: 46px; animation: fadeUp 0.8s ease both; }
+  .section-title { font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 3px; color: var(--muted); text-transform: uppercase; margin-bottom: 20px; display: flex; align-items: center; gap: 12px; }
+  .section-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+  .comp-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 3px; }
+  .comp-card { background: var(--surface); border: 1px solid var(--border); padding: 20px 22px; position: relative; overflow: hidden; }
+  .comp-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--accent3); }
+  .comp-card.avoid::before { background: #ef4444; }
+  .comp-head { font-weight: 800; font-size: 14px; color: #fff; margin-bottom: 6px; }
+  .comp-desc { font-family: 'Space Mono', monospace; font-size: 10px; color: var(--muted); line-height: 1.65; }
+  .comp-tag { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 1px; text-transform: uppercase; color: var(--accent3); }
+  .comp-card.avoid .comp-tag { color: #f87171; }
+  .flow { background: var(--surface); border: 1px solid var(--border); padding: 28px; display: flex; align-items: center; justify-content: center; gap: 0; flex-wrap: wrap; row-gap: 14px; }
+  .flow-node { background: #0a0414; border: 1px solid var(--border); padding: 10px 16px; font-size: 12.5px; font-weight: 600; white-space: nowrap; }
+  .flow-node.h1 { border-color: var(--accent); color: var(--accent); }
+  .flow-node.h2 { border-color: var(--api); color: var(--api); }
+  .flow-node.h3 { border-color: var(--accent3); color: var(--accent3); }
+  .flow-arrow { font-family: 'Space Mono', monospace; color: var(--muted); padding: 0 8px; font-size: 15px; }
+  .scope { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px,1fr)); gap: 3px; }
+  .scope-card { background: var(--surface); border: 1px solid var(--border); padding: 20px; text-align: center; }
+  .scope-num { font-size: 30px; font-weight: 800; color: var(--accent); line-height: 1; }
+  .scope-label { font-family: 'Space Mono', monospace; font-size: 10px; color: var(--muted); letter-spacing: 1px; text-transform: uppercase; margin-top: 8px; }
+  .footer { margin-top: 56px; text-align: center; font-family: 'Space Mono', monospace; font-size: 11px; color: var(--muted); letter-spacing: 1px; }
+  .footer a { color: var(--accent); text-decoration: none; }
+  @keyframes fadeDown { from { opacity: 0; transform: translateY(-24px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.6; } }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="header">
+    <div class="logo-tag">Architecture v1.0 · Private</div>
+    <h1>Más Watts</h1>
+    <div class="subtitle">Music-Guessing Party Game — Offline-First Mobile · Guatemala / LATAM</div>
+    <div class="header-links">
+      <a href="portfolio.html">← Back to Portfolio</a>
+    </div>
+  </div>
+
+  <div class="legend">
+    <div class="legend-item"><div class="legend-dot dot-device"></div><span>On-Device</span></div>
+    <div class="legend-item"><div class="legend-dot dot-api"></div><span>Free Public API</span></div>
+    <div class="legend-item"><div class="legend-dot dot-plan"></div><span>Planned / Optional</span></div>
+  </div>
+
+  <div class="arch">
+
+    <div class="layer">
+      <div class="layer-label">App Shell</div>
+      <div class="layer-content">
+        <div class="tool device"><span class="tool-badge badge-device">On-Device</span><div class="tool-name">React Native + Expo</div><div class="tool-role">Single-phone host app · Google Play / Android first, iOS later · no accounts, no servers</div></div>
+      </div>
+    </div>
+
+    <div class="layer">
+      <div class="layer-label">Audio Engine</div>
+      <div class="layer-content">
+        <div class="tool device"><span class="tool-badge badge-device">On-Device</span><div class="tool-name">expo-av / track-player</div><div class="tool-role">Playback to phone or Bluetooth speaker</div></div>
+        <div class="tool device"><span class="tool-badge badge-device">On-Device</span><div class="tool-name">Real-Time FX</div><div class="tool-role">Speed (1.5× / 0.6×) · pitch shift (+4 st) · low-pass — applied live in the audio graph, never written to disk</div></div>
+      </div>
+    </div>
+
+    <div class="layer">
+      <div class="layer-label">Audio Source</div>
+      <div class="layer-content">
+        <div class="tool api"><span class="tool-badge badge-api">Free API</span><div class="tool-name">iTunes Search API</div><div class="tool-role">Public 30-second previews, sliced to 1s / 3s / 5s / 15s snippets for the bidding tiers</div></div>
+      </div>
+    </div>
+
+    <div class="layer">
+      <div class="layer-label">Announcer</div>
+      <div class="layer-content">
+        <div class="tool device"><span class="tool-badge badge-device">On-Device</span><div class="tool-name">expo-speech (TTS)</div><div class="tool-role">Native Spanish TTS · DJ-radio persona for modifier cards &amp; round transitions</div></div>
+      </div>
+    </div>
+
+    <div class="layer">
+      <div class="layer-label">Scanning</div>
+      <div class="layer-content">
+        <div class="tool device"><span class="tool-badge badge-device">On-Device</span><div class="tool-name">Camera QR</div><div class="tool-role">Scan the box QR to start a session · scan each card to trigger playback</div></div>
+      </div>
+    </div>
+
+    <div class="layer">
+      <div class="layer-label">Local Data</div>
+      <div class="layer-content">
+        <div class="tool device"><span class="tool-badge badge-device">On-Device</span><div class="tool-name">SQLite / bundled JSON</div><div class="tool-role">~200–500 curated GT &amp; LATAM song catalog shipped in the app · fully offline</div></div>
+      </div>
+    </div>
+
+    <div class="layer">
+      <div class="layer-label">Game Logic</div>
+      <div class="layer-content">
+        <div class="tool device"><span class="tool-badge badge-device">On-Device</span><div class="tool-name">Bidding Tiers</div><div class="tool-role">Declare before scan: 1s = 5pts · 3s = 3pts · 5s = 1pt</div></div>
+        <div class="tool device"><span class="tool-badge badge-device">On-Device</span><div class="tool-name">KO + Bonus Scoring</div><div class="tool-role">Failed guesses open to the table · artist / year±2 / album bonuses</div></div>
+        <div class="tool device"><span class="tool-badge badge-device">On-Device</span><div class="tool-name">Modifier Cards</div><div class="tool-role">~10% of deck: speed / pitch / low-pass / no-audio + rule twists</div></div>
+      </div>
+    </div>
+
+    <div class="layer">
+      <div class="layer-label">Full-Song Links</div>
+      <div class="layer-content">
+        <div class="tool api"><span class="tool-badge badge-api">Free API</span><div class="tool-name">Songlink / Odesli</div><div class="tool-role">Post-round deep links across Spotify · Apple Music · YouTube Music · Deezer (user picks preferred service)</div></div>
+      </div>
+    </div>
+
+    <div class="layer">
+      <div class="layer-label">Analysis</div>
+      <div class="layer-content">
+        <div class="tool plan"><span class="tool-badge badge-plan">Optional</span><div class="tool-name">Librosa / Essentia</div><div class="tool-role">Offline feature extraction (BPM, key, energy) from previews — facts, not derivatives</div></div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="section">
+    <div class="section-title">Legal-by-Design — Built on Compliant Audio Sources</div>
+    <div class="comp-grid">
+      <div class="comp-card"><div class="comp-tag">Playback</div><div class="comp-head">iTunes Previews</div><div class="comp-desc">30-second public previews for in-game snippets. No stream ripping, no cached full tracks.</div></div>
+      <div class="comp-card"><div class="comp-tag">Full Songs</div><div class="comp-head">Streaming Deep Links</div><div class="comp-desc">Songlink/Odesli hands off to the user's own streaming service post-round.</div></div>
+      <div class="comp-card"><div class="comp-tag">No Derivatives</div><div class="comp-head">Live FX Only</div><div class="comp-desc">Speed / pitch / filter applied in the playback graph at runtime — modified audio is never persisted.</div></div>
+      <div class="comp-card"><div class="comp-tag">Privacy</div><div class="comp-head">Zero Data Collection</div><div class="comp-desc">v1 has no accounts, analytics, or telemetry. Privacy policy states this explicitly.</div></div>
+      <div class="comp-card avoid"><div class="comp-tag">Explicitly Avoided</div><div class="comp-head">Spotify SDK / Codes / Jam</div><div class="comp-desc">Spotify developer policy prohibits music games; Codes barred on physical goods.</div></div>
+      <div class="comp-card avoid"><div class="comp-tag">Explicitly Avoided</div><div class="comp-head">AI Stems &amp; AI Covers</div><div class="comp-desc">Stem separation and AI covers raise derivative-work / copyright issues — out of scope.</div></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">One Round — Card to Guess</div>
+    <div class="flow">
+      <div class="flow-node h1">Draw Card<br><small style="font-size:10px;opacity:.6">declare tier</small></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node">Scan QR</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node h2">iTunes Preview<br><small style="font-size:10px;opacity:.6">slice 1s/3s/5s</small></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node h1">Live FX<br><small style="font-size:10px;opacity:.6">modifier cards</small></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node">Guess + Bonus</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node h3">Score → Deep Link</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Build Scope</div>
+    <div class="scope">
+      <div class="scope-card"><div class="scope-num">~40h</div><div class="scope-label">Active Build</div></div>
+      <div class="scope-card"><div class="scope-num">3–5wk</div><div class="scope-label">Calendar @ ~10h/wk</div></div>
+      <div class="scope-card"><div class="scope-num">0</div><div class="scope-label">Backend Servers</div></div>
+      <div class="scope-card"><div class="scope-num">1</div><div class="scope-label">Host Phone</div></div>
+    </div>
+  </div>
+
+  <div class="footer">
+    Más Watts · Guatemala / LATAM · Solo technical build — co-founder Cecilia L. leads art &amp; design · <a href="portfolio.html">Back to Portfolio</a>
+  </div>
+
+</div>
+</body></html>

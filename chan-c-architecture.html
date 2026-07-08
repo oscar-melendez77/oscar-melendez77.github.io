@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CHAN-C — Architecture</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #04100a;
+    --surface: #0a1c12;
+    --border: #123726;
+    --accent: #25d366;
+    --accent2: #f59e0b;
+    --accent3: #38bdf8;
+    --warn: #f59e0b;
+    --text: #cfe8d8;
+    --muted: #5a7a68;
+    --prod: #25d366;
+    --plan: #f59e0b;
+    --seam: #a78bfa;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--bg); color: var(--text); font-family: 'Syne', sans-serif; min-height: 100vh; overflow-x: hidden; }
+  body::before {
+    content: ''; position: fixed; inset: 0;
+    background-image:
+      linear-gradient(rgba(37,211,102,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(37,211,102,0.03) 1px, transparent 1px);
+    background-size: 40px 40px; pointer-events: none; z-index: 0;
+  }
+  .container { position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 48px 32px; }
+  .header { text-align: center; margin-bottom: 56px; animation: fadeDown 0.8s ease both; }
+  .logo-tag { display: inline-block; font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 4px; color: var(--accent); text-transform: uppercase; border: 1px solid var(--accent); padding: 4px 12px; margin-bottom: 20px; opacity: 0.85; }
+  h1 { font-size: clamp(36px, 6vw, 72px); font-weight: 800; line-height: 1; background: linear-gradient(135deg, #fff 0%, var(--accent) 55%, var(--accent2) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 12px; }
+  .subtitle { font-family: 'Space Mono', monospace; font-size: 13px; color: var(--muted); letter-spacing: 2px; }
+  .header-links { margin-top: 18px; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .header-links a { text-decoration: none; font-size: 13px; font-weight: 600; padding: 8px 18px; border-radius: 4px; }
+  .btn-solid { color: #04110d; background: var(--accent); }
+  .btn-ghost { color: var(--text); background: transparent; border: 1px solid var(--border); }
+  .legend { display: flex; gap: 24px; justify-content: center; margin-bottom: 48px; flex-wrap: wrap; animation: fadeUp 0.8s 0.2s ease both; }
+  .legend-item { display: flex; align-items: center; gap: 8px; font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 1px; }
+  .legend-dot { width: 10px; height: 10px; border-radius: 2px; }
+  .dot-prod { background: var(--prod); }
+  .dot-plan { background: var(--plan); }
+  .dot-seam { background: var(--seam); }
+  .arch { display: flex; flex-direction: column; gap: 3px; }
+  .layer { display: grid; grid-template-columns: 170px 1fr; gap: 3px; animation: fadeUp 0.6s ease both; }
+  .layer:nth-child(1){animation-delay:.1s}.layer:nth-child(2){animation-delay:.15s}.layer:nth-child(3){animation-delay:.2s}.layer:nth-child(4){animation-delay:.25s}.layer:nth-child(5){animation-delay:.3s}.layer:nth-child(6){animation-delay:.35s}.layer:nth-child(7){animation-delay:.4s}.layer:nth-child(8){animation-delay:.45s}.layer:nth-child(9){animation-delay:.5s}.layer:nth-child(10){animation-delay:.55s}
+  .layer-label { background: var(--surface); border: 1px solid var(--border); display: flex; align-items: center; padding: 0 16px; font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 2px; color: var(--muted); text-transform: uppercase; }
+  .layer-content { display: flex; gap: 3px; flex-wrap: wrap; }
+  .tool { flex: 1; min-width: 150px; background: var(--surface); border: 1px solid var(--border); padding: 16px 20px; position: relative; transition: all 0.25s ease; overflow: hidden; }
+  .tool::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; }
+  .tool.prod::before { background: var(--prod); }
+  .tool.plan::before { background: var(--plan); }
+  .tool.seam::before { background: var(--seam); }
+  .tool:hover { border-color: var(--accent); transform: translateY(-2px); background: #0d2417; }
+  .tool-name { font-weight: 800; font-size: 15px; color: #fff; margin-bottom: 4px; }
+  .tool-role { font-family: 'Space Mono', monospace; font-size: 10px; color: var(--muted); letter-spacing: 0.3px; line-height: 1.55; }
+  .tool-badge { position: absolute; top: 12px; right: 12px; font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 1px; padding: 2px 7px; border-radius: 2px; text-transform: uppercase; }
+  .badge-prod { background: rgba(37,211,102,0.1); color: var(--prod); border: 1px solid rgba(37,211,102,0.3); }
+  .badge-plan { background: rgba(245,158,11,0.1); color: var(--plan); border: 1px solid rgba(245,158,11,0.3); animation: pulse 2s infinite; }
+  .badge-seam { background: rgba(167,139,250,0.1); color: #c4b5fd; border: 1px solid rgba(167,139,250,0.3); }
+  .section { margin-top: 46px; animation: fadeUp 0.8s ease both; }
+  .section-title { font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 3px; color: var(--muted); text-transform: uppercase; margin-bottom: 20px; display: flex; align-items: center; gap: 12px; }
+  .section-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+  .seam-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 3px; }
+  .seam-card { background: var(--surface); border: 1px solid var(--border); padding: 20px 24px; position: relative; overflow: hidden; }
+  .seam-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--accent), var(--seam)); }
+  .seam-flow { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; flex-wrap: wrap; }
+  .seam-from { font-weight: 800; font-size: 16px; color: var(--accent); }
+  .seam-arrow { font-family: 'Space Mono', monospace; color: var(--muted); font-size: 15px; }
+  .seam-to { font-weight: 800; font-size: 16px; color: #c4b5fd; }
+  .seam-desc { font-family: 'Space Mono', monospace; font-size: 10px; color: var(--muted); line-height: 1.6; }
+  .code-block { background: #020e08; border: 1px solid var(--border); border-left: 3px solid var(--accent); padding: 24px 28px; font-family: 'Space Mono', monospace; font-size: 12px; line-height: 2; overflow-x: auto; }
+  .code-comment { color: var(--muted); }
+  .code-key { color: var(--accent); }
+  .code-val { color: var(--prod); }
+  .code-str { color: #ffce8a; }
+  .code-fn { color: #c4b5fd; }
+  .hosting-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 3px; }
+  .hosting-card { background: var(--surface); border: 1px solid var(--border); padding: 20px; position: relative; }
+  .hosting-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--accent); }
+  .hosting-platform { font-family: 'Space Mono', monospace; font-size: 10px; color: var(--accent); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 6px; }
+  .hosting-what { font-weight: 800; font-size: 15px; color: #fff; margin-bottom: 4px; }
+  .hosting-desc { font-family: 'Space Mono', monospace; font-size: 10px; color: var(--muted); line-height: 1.6; }
+  .flow { background: var(--surface); border: 1px solid var(--border); padding: 28px; display: flex; align-items: center; justify-content: center; gap: 0; flex-wrap: wrap; row-gap: 14px; }
+  .flow-node { background: #020e08; border: 1px solid var(--border); padding: 10px 16px; font-size: 12.5px; font-weight: 600; white-space: nowrap; }
+  .flow-node.h1 { border-color: var(--accent); color: var(--accent); }
+  .flow-node.h2 { border-color: var(--seam); color: #c4b5fd; }
+  .flow-node.h3 { border-color: var(--accent2); color: var(--accent2); }
+  .flow-arrow { font-family: 'Space Mono', monospace; color: var(--muted); padding: 0 8px; font-size: 15px; }
+  .footer { margin-top: 56px; text-align: center; font-family: 'Space Mono', monospace; font-size: 11px; color: var(--muted); letter-spacing: 1px; }
+  .footer a { color: var(--accent); text-decoration: none; }
+  @keyframes fadeDown { from { opacity: 0; transform: translateY(-24px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.6; } }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="header">
+    <div class="logo-tag">Architecture v1.0 · Private</div>
+    <h1>CHAN-C</h1>
+    <div class="subtitle">Construction Labor Marketplace — WhatsApp-First Conversational Commerce</div>
+    <div class="header-links">
+      <a class="btn-ghost" href="portfolio.html">← Back to Portfolio</a>
+    </div>
+  </div>
+
+  <div class="legend">
+    <div class="legend-item"><div class="legend-dot dot-prod"></div><span>In Production</span></div>
+    <div class="legend-item"><div class="legend-dot dot-plan"></div><span>Pre-Launch</span></div>
+    <div class="legend-item"><div class="legend-dot dot-seam"></div><span>Vendor Seam — swappable</span></div>
+  </div>
+
+  <div class="arch">
+
+    <div class="layer">
+      <div class="layer-label">Channel</div>
+      <div class="layer-content">
+        <div class="tool seam"><span class="tool-badge badge-seam">Seam</span><div class="tool-name">Twilio WhatsApp API</div><div class="tool-role">Production WABA · interactive list &amp; button messages · template fallback for closed 24h windows. Provider seam built for Meta Cloud API migration</div></div>
+      </div>
+    </div>
+
+    <div class="layer">
+      <div class="layer-label">Frontend</div>
+      <div class="layer-content">
+        <div class="tool prod"><span class="tool-badge badge-prod">Live</span><div class="tool-name">Next.js 14 + TypeScript</div><div class="tool-role">Tailwind CSS · web app on Vercel</div></div>
+        <div class="tool prod"><span class="tool-badge badge-prod">Live</span><div class="tool-name">React Native + Expo</div><div class="tool-role">Mobile app · Expo SDK 56</div></div>
+      </div>
+    </div>
+
+    <div class="layer">
+      <div class="layer-label">Backend</div>
+      <div class="layer-content">
+        <div class="tool prod"><span class="tool-badge badge-prod">Live</span><div class="tool-name">Python · FastAPI</div><div class="tool-role">Stateful deal-flow API · hosted on Render</div></div>
+      </div>
+    </div>
+
+    <div class="layer">
+      <div class="layer-label">Database</div>
+      <div class="layer-content">
+        <div class="tool prod"><span class="tool-badge badge-prod">Live</span><div class="tool-name">Supabase · PostgreSQL</div><div class="tool-role">Threaded inboxes · deals · workers · reputation · escrow ledger</div></div>
+      </div>
+    </div>
+
+    <div class="layer">
+      <div class="layer-label">Deal-Flow Engine</div>
+      <div class="layer-content">
+        <div class="tool prod"><span class="tool-badge badge-prod">Live</span><div class="tool-name">State Machine</div><div class="tool-role">propuesta → acceptance → escrow → in-job pings → completion → rating</div></div>
+        <div class="tool prod"><span class="tool-badge badge-prod">Live</span><div class="tool-name">Commission Engine</div><div class="tool-role">Three tiers (15% / 17% / 20%) computed on top of the worker's quote</div></div>
+        <div class="tool prod"><span class="tool-badge badge-prod">Live</span><div class="tool-name">Reputation Ladder</div><div class="tool-role">Four-rung worker ladder affecting commission &amp; payout speed</div></div>
+        <div class="tool plan"><span class="tool-badge badge-plan">Pre-Launch</span><div class="tool-name">Escrow &amp; Disputes</div><div class="tool-role">Three-party confirmation before release · refund machinery</div></div>
+      </div>
+    </div>
+
+    <div class="layer">
+      <div class="layer-label">AI / ML</div>
+      <div class="layer-content">
+        <div class="tool prod"><span class="tool-badge badge-prod">Live</span><div class="tool-name">Google Gemini</div><div class="tool-role">Intent parsing · conversational intake</div></div>
+        <div class="tool prod"><span class="tool-badge badge-prod">Live</span><div class="tool-name">Anthropic Claude</div><div class="tool-role">Haiku for report text · Sonnet for job-photo analysis</div></div>
+        <div class="tool prod"><span class="tool-badge badge-prod">Live</span><div class="tool-name">Google Vision</div><div class="tool-role">ID / document OCR at onboarding</div></div>
+        <div class="tool prod"><span class="tool-badge badge-prod">Live</span><div class="tool-name">Google Speech STT / TTS</div><div class="tool-role">Voice-note transcription &amp; replies</div></div>
+        <div class="tool plan"><span class="tool-badge badge-plan">Gated</span><div class="tool-name">AWS Rekognition</div><div class="tool-role">Face match on ID verification (feature-gated)</div></div>
+      </div>
+    </div>
+
+    <div class="layer">
+      <div class="layer-label">E-Invoicing (FEL)</div>
+      <div class="layer-content">
+        <div class="tool seam"><span class="tool-badge badge-seam">Seam</span><div class="tool-name">INFILE Certificador</div><div class="tool-role">SAT-authorized FEL electronic invoicing (REST/JSON) behind a swappable CertificadorClient</div></div>
+      </div>
+    </div>
+
+    <div class="layer">
+      <div class="layer-label">Maps &amp; Location</div>
+      <div class="layer-content">
+        <div class="tool prod"><span class="tool-badge badge-prod">Live</span><div class="tool-name">Google Maps Platform</div><div class="tool-role">Maps JavaScript · Geocoding · Places · in-job location pings</div></div>
+      </div>
+    </div>
+
+    <div class="layer">
+      <div class="layer-label">Payments</div>
+      <div class="layer-content">
+        <div class="tool prod"><span class="tool-badge badge-prod">Live</span><div class="tool-name">Banrural Transfer</div><div class="tool-role">Cashless pickup · no bank account required</div></div>
+        <div class="tool prod"><span class="tool-badge badge-prod">Live</span><div class="tool-name">Tigo Money</div><div class="tool-role">USSD mobile-money backup rail</div></div>
+      </div>
+    </div>
+
+    <div class="layer">
+      <div class="layer-label">Infra / CI</div>
+      <div class="layer-content">
+        <div class="tool prod"><span class="tool-badge badge-prod">Live</span><div class="tool-name">GitHub</div><div class="tool-role">Code · CI/CD · deterministic simulation harness for $0 conversation tests</div></div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="section">
+    <div class="section-title">Vendor Seams — Swap Without Touching Business Logic</div>
+    <div class="seam-grid">
+      <div class="seam-card">
+        <div class="seam-flow">
+          <span class="seam-from">TwilioProvider</span>
+          <span class="seam-arrow">———▶</span>
+          <span class="seam-to">MetaProvider</span>
+        </div>
+        <div class="seam-desc">MESSAGING_PROVIDER=meta in .env<br>Same interface for list/button/template sends.<br>Migrate Twilio → Meta Cloud API, zero caller changes.</div>
+      </div>
+      <div class="seam-card">
+        <div class="seam-flow">
+          <span class="seam-from">CertificadorClient</span>
+          <span class="seam-arrow">———▶</span>
+          <span class="seam-to">INFILEClient</span>
+        </div>
+        <div class="seam-desc">CERTIFICADOR=infile in .env<br>FEL issuance behind one client interface.<br>Swap SAT-authorized certificador without refactors.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Provider-Seam Pattern</div>
+    <div class="code-block">
+      <span class="code-comment"># config/providers.py — swappable vendors from day one</span><br><br>
+      <span class="code-key">MESSAGING_PROVIDER</span> = <span class="code-fn">os.getenv</span>(<span class="code-str">"MESSAGING_PROVIDER"</span>, <span class="code-str">"twilio"</span>)&nbsp;&nbsp;<span class="code-comment"># flip to "meta"</span><br>
+      <span class="code-key">CERTIFICADOR</span> = <span class="code-fn">os.getenv</span>(<span class="code-str">"CERTIFICADOR"</span>, <span class="code-str">"infile"</span>)<br><br>
+      <span class="code-key">def</span> <span class="code-fn">get_messenger</span>():<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-key">if</span> MESSAGING_PROVIDER == <span class="code-str">"twilio"</span>: <span class="code-key">return</span> <span class="code-fn">TwilioProvider</span>()<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-key">if</span> MESSAGING_PROVIDER == <span class="code-str">"meta"</span>:&nbsp;&nbsp;&nbsp;<span class="code-key">return</span> <span class="code-fn">MetaProvider</span>()&nbsp;&nbsp;<span class="code-comment"># business logic never changes</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Hosting — Lean, Managed Services</div>
+    <div class="hosting-grid">
+      <div class="hosting-card"><div class="hosting-platform">Render.com</div><div class="hosting-what">FastAPI Backend</div><div class="hosting-desc">Deal-flow API + webhooks.<br>Auto-deploys from GitHub.</div></div>
+      <div class="hosting-card"><div class="hosting-platform">Vercel</div><div class="hosting-what">Next.js Web App</div><div class="hosting-desc">Admin + hirer web console.<br>Edge-hosted, CI on push.</div></div>
+      <div class="hosting-card"><div class="hosting-platform">Supabase</div><div class="hosting-what">PostgreSQL</div><div class="hosting-desc">Managed Postgres + auth.<br>Row-level security.</div></div>
+      <div class="hosting-card"><div class="hosting-platform">Netlify</div><div class="hosting-what">Marketing + DNS</div><div class="hosting-desc">Landing site &amp; domain routing.</div></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">End-to-End Deal Flow</div>
+    <div class="flow">
+      <div class="flow-node h1">Worker / Hirer<br><small style="font-size:10px;opacity:.6">WhatsApp thread</small></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node">Twilio WABA</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node">FastAPI</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node h2">Deal-Flow Engine<br><small style="font-size:10px;opacity:.6">quote · commission</small></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node">Supabase</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node h3">3-Party Confirm<br><small style="font-size:10px;opacity:.6">worker · hirer · admin</small></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node h1">Escrow → FEL Invoice</div>
+    </div>
+  </div>
+
+  <div class="footer">
+    CHAN-C · Guatemala City · Sole technical build — co-founder Cecilia L. leads art &amp; design · <a href="portfolio.html">Back to Portfolio</a>
+  </div>
+
+</div>
+</body></html>
