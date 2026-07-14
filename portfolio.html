@@ -638,15 +638,9 @@ week's dominant mood archetype using XGBoost + SHAP.`,
      cannot be recovered from the page source.
   ============================================================ */
   (function () {
-    const modal  = $("wa-modal");
-    const input  = $("wa-input");
-    const errEl  = $("wa-err");
-    const okBtn  = $("wa-submit");
-    const noBtn  = $("wa-cancel");
-    let current  = null;
-
-    const b64ToBytes = (b64) =>
-      Uint8Array.from(atob(b64), c => c.charCodeAt(0));
+    let current = null;
+    const el = (id) => document.getElementById(id);
+    const b64ToBytes = (b64) => Uint8Array.from(atob(b64), c => c.charCodeAt(0));
 
     async function decryptWa(pass, payload) {
       const enc = new TextEncoder();
@@ -662,24 +656,35 @@ week's dominant mood archetype using XGBoost + SHAP.`,
 
     function openModal(payload) {
       current = payload;
-      errEl.textContent = "";
+      const modal = el("wa-modal"), input = el("wa-input"), err = el("wa-err");
+      if (!modal) return;
+      err.textContent = "";
       input.value = "";
       modal.classList.add("open");
       setTimeout(() => input.focus(), 30);
     }
-    function closeModal() { modal.classList.remove("open"); current = null; }
+    function closeModal() {
+      current = null;
+      const modal = el("wa-modal");
+      if (modal) modal.classList.remove("open");
+    }
 
     async function submit() {
       if (!current) return;
+      const input = el("wa-input"), err = el("wa-err");
       const pass = input.value;
-      if (!pass) { errEl.textContent = "Enter the password."; return; }
-      errEl.textContent = "Checking…";
+      if (!pass) { err.textContent = "Enter the password."; return; }
+      if (!(window.crypto && crypto.subtle)) {
+        err.textContent = "Needs a secure (https) page.";
+        return;
+      }
+      err.textContent = "Checking…";
       try {
         const url = await decryptWa(pass, current);
         closeModal();
         window.open(url, "_blank", "noopener");
       } catch (e) {
-        errEl.textContent = "Wrong password.";
+        err.textContent = "Wrong password.";
       }
     }
 
@@ -687,12 +692,17 @@ week's dominant mood archetype using XGBoost + SHAP.`,
       const btn = e.target.closest(".wa-locked");
       if (btn) {
         openModal({ salt: btn.dataset.salt, iv: btn.dataset.iv, ct: btn.dataset.ct });
+        return;
       }
+      if (e.target.closest("#wa-submit")) { submit(); return; }
+      if (e.target.closest("#wa-cancel")) { closeModal(); return; }
+      if (e.target.id === "wa-modal")     { closeModal(); }
     });
-    okBtn.addEventListener("click", submit);
-    noBtn.addEventListener("click", closeModal);
-    input.addEventListener("keydown", (e) => { if (e.key === "Enter") submit(); });
-    modal.addEventListener("click", (e) => { if (e.target === modal) closeModal(); });
+    document.addEventListener("keydown", (e) => {
+      const modal = el("wa-modal");
+      if (e.key === "Enter" && modal && modal.classList.contains("open")) submit();
+      if (e.key === "Escape" && modal && modal.classList.contains("open")) closeModal();
+    });
   })();
 </script>
 
