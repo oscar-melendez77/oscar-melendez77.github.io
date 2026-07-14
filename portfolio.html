@@ -117,7 +117,11 @@ week's dominant mood archetype using XGBoost + SHAP.`,
         ],
         link:  "#",
         label: "Private",
-        waLink: "https://wa.me/50252433020",
+        waEnc: {
+          salt: "JCK3+6GPboxnf6+5c+c+Rg==",
+          iv:   "VailJFFDBbVh2pqM",
+          ct:   "QLRWsYdw8gv2e0F8lUd/emzKqABY47Wm508eBjyN6Qgtm0Bk2Cf6vUk=",
+        },
         archLink: "chan-c-architecture.html",
         tags:  ["Python", "FastAPI", "Next.js", "React Native", "Supabase", "Twilio API", "Gemini", "Claude", "Google Cloud", "FEL"],
       },
@@ -371,6 +375,34 @@ week's dominant mood archetype using XGBoost + SHAP.`,
     .work-cta { display: flex; gap: .8rem; flex-wrap: wrap; }
     .btn.ghost { background: transparent; box-shadow: 4px 4px 0 var(--ink); }
     .btn.disabled { opacity: .45; pointer-events: none; box-shadow: none; }
+    button.btn { cursor: pointer; line-height: 1; }
+
+    /* WhatsApp password gate */
+    .wa-modal {
+      position: fixed; inset: 0; z-index: 999;
+      display: none; align-items: center; justify-content: center;
+      background: rgba(11,31,30,.55); backdrop-filter: blur(3px);
+      padding: 1.2rem;
+    }
+    .wa-modal.open { display: flex; }
+    .wa-box {
+      background: var(--card); border: var(--edge); box-shadow: 8px 8px 0 var(--ink);
+      max-width: 380px; width: 100%; padding: 1.6rem;
+    }
+    .wa-box h3 {
+      font-family: var(--mono); font-size: .95rem; text-transform: uppercase;
+      letter-spacing: .04em; margin-bottom: .4rem;
+    }
+    .wa-box p { font-size: .85rem; color: var(--ink-2); margin-bottom: 1rem; }
+    .wa-box input {
+      width: 100%; font-family: var(--mono); font-size: .95rem;
+      padding: .7rem .8rem; border: var(--edge); background: var(--paper);
+      color: var(--ink); margin-bottom: .9rem;
+    }
+    .wa-box input:focus { outline: none; box-shadow: 3px 3px 0 var(--accent); }
+    .wa-err { color: #b3261e; font-size: .8rem; min-height: 1.1rem; margin-bottom: .6rem; }
+    .wa-actions { display: flex; gap: .6rem; }
+    .wa-actions .btn { box-shadow: 4px 4px 0 var(--ink); }
     @media (max-width: 720px){
       .work-item { grid-template-columns: 1fr; gap: 1rem; }
       .work-hl { grid-template-columns: 1fr; }
@@ -566,8 +598,8 @@ week's dominant mood archetype using XGBoost + SHAP.`,
       : `<span class="btn disabled">${p.label}</span>`;
     const arch = p.archLink
       ? `<a class="btn ghost" href="${p.archLink}" target="_blank" rel="noopener">Architecture ↗</a>` : "";
-    const wa = p.waLink
-      ? `<a class="btn solid" href="${p.waLink}" target="_blank" rel="noopener">Chat on WhatsApp ↗</a>` : "";
+    const wa = p.waEnc
+      ? `<button type="button" class="btn solid wa-locked" data-salt="${p.waEnc.salt}" data-iv="${p.waEnc.iv}" data-ct="${p.waEnc.ct}">Chat on WhatsApp 🔒</button>` : "";
     const item = document.createElement("div");
     item.className = "work-item";
     item.innerHTML = `
@@ -599,6 +631,82 @@ week's dominant mood archetype using XGBoost + SHAP.`,
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } });
   }, { threshold: 0.12 });
   document.querySelectorAll(".rv").forEach(el => io.observe(el));
+
+  /* ============================================================
+     WhatsApp password gate — decrypts the wa.me link client-side.
+     The number is AES-GCM encrypted; without the password it
+     cannot be recovered from the page source.
+  ============================================================ */
+  (function () {
+    const modal  = $("wa-modal");
+    const input  = $("wa-input");
+    const errEl  = $("wa-err");
+    const okBtn  = $("wa-submit");
+    const noBtn  = $("wa-cancel");
+    let current  = null;
+
+    const b64ToBytes = (b64) =>
+      Uint8Array.from(atob(b64), c => c.charCodeAt(0));
+
+    async function decryptWa(pass, payload) {
+      const enc = new TextEncoder();
+      const baseKey = await crypto.subtle.importKey(
+        "raw", enc.encode(pass), "PBKDF2", false, ["deriveKey"]);
+      const key = await crypto.subtle.deriveKey(
+        { name: "PBKDF2", salt: b64ToBytes(payload.salt), iterations: 150000, hash: "SHA-256" },
+        baseKey, { name: "AES-GCM", length: 256 }, false, ["decrypt"]);
+      const pt = await crypto.subtle.decrypt(
+        { name: "AES-GCM", iv: b64ToBytes(payload.iv) }, key, b64ToBytes(payload.ct));
+      return new TextDecoder().decode(pt);
+    }
+
+    function openModal(payload) {
+      current = payload;
+      errEl.textContent = "";
+      input.value = "";
+      modal.classList.add("open");
+      setTimeout(() => input.focus(), 30);
+    }
+    function closeModal() { modal.classList.remove("open"); current = null; }
+
+    async function submit() {
+      if (!current) return;
+      const pass = input.value;
+      if (!pass) { errEl.textContent = "Enter the password."; return; }
+      errEl.textContent = "Checking…";
+      try {
+        const url = await decryptWa(pass, current);
+        closeModal();
+        window.open(url, "_blank", "noopener");
+      } catch (e) {
+        errEl.textContent = "Wrong password.";
+      }
+    }
+
+    document.addEventListener("click", (e) => {
+      const btn = e.target.closest(".wa-locked");
+      if (btn) {
+        openModal({ salt: btn.dataset.salt, iv: btn.dataset.iv, ct: btn.dataset.ct });
+      }
+    });
+    okBtn.addEventListener("click", submit);
+    noBtn.addEventListener("click", closeModal);
+    input.addEventListener("keydown", (e) => { if (e.key === "Enter") submit(); });
+    modal.addEventListener("click", (e) => { if (e.target === modal) closeModal(); });
+  })();
 </script>
+
+<div class="wa-modal" id="wa-modal" role="dialog" aria-modal="true" aria-labelledby="wa-title">
+  <div class="wa-box">
+    <h3 id="wa-title">Protected link 🔒</h3>
+    <p>Enter the password to open the CHAN-C WhatsApp chat.</p>
+    <input id="wa-input" type="password" placeholder="Password" autocomplete="off" />
+    <div class="wa-err" id="wa-err"></div>
+    <div class="wa-actions">
+      <button type="button" class="btn solid" id="wa-submit">Unlock ↗</button>
+      <button type="button" class="btn ghost" id="wa-cancel">Cancel</button>
+    </div>
+  </div>
+</div>
 </body>
 </html>
