@@ -99,9 +99,9 @@
 <div class="container">
 
   <div class="header">
-    <div class="logo-tag">Architecture v1.0 · Private</div>
+    <div class="logo-tag">Architecture v2.0 · Private</div>
     <h1>CHAN-C</h1>
-    <div class="subtitle">Construction Labor Marketplace — WhatsApp-First Conversational Commerce</div>
+    <div class="subtitle">Construction Labor Marketplace — Three-Line WhatsApp System (A / B / C) on Meta Cloud API</div>
     <div class="header-links">
       <a class="btn-ghost" href="portfolio.html">← Back to Portfolio</a>
     </div>
@@ -118,50 +118,82 @@
     <div class="layer">
       <div class="layer-label">Channel</div>
       <div class="layer-content">
-        <div class="tool seam"><span class="tool-badge badge-seam">Seam</span><div class="tool-name">Twilio WhatsApp API</div><div class="tool-role">Production WABA · interactive list &amp; button messages · template fallback for closed 24h windows. Provider seam built for Meta Cloud API migration</div></div>
+        <div class="tool prod"><span class="tool-badge badge-prod">Live</span><div class="tool-name">Meta WhatsApp Cloud API</div><div class="tool-role">Graph API from day one. Outbound: JSON POST to /{PHONE_NUMBER_ID}/messages · Bearer auth · bare E.164. Inbound: GET verify handshake + POST webhooks (messages[] / statuses[]) · X-Hub-Signature-256 validated · reply 200 + empty body. Interactive buttons &amp; lists · media by media_id</div></div>
+        <div class="tool prod"><span class="tool-badge badge-prod">Live</span><div class="tool-name">WhatsApp Flows</div><div class="tool-role">Encrypted /flow endpoint · native forms for the atomic deal lock &amp; the comprobante (proof-of-payment) upload — no PWA handoff</div></div>
+      </div>
+    </div>
+
+    <div class="layer">
+      <div class="layer-label">Three Lines</div>
+      <div class="layer-content">
+        <div class="tool prod"><span class="tool-badge badge-prod">Live</span><div class="tool-name">Line A — Onboarding</div><div class="tool-role">Identity / DPI verification · general &amp; home menu. Each line does only its job</div></div>
+        <div class="tool prod"><span class="tool-badge badge-prod">Live</span><div class="tool-name">Line B — Deal-Making</div><div class="tool-role">Job posting · reverse-auction negotiation (workers bid their own price) · masked anti-poaching relay · atomic deal lock via WhatsApp Flow. Contact stays masked. A locked job shows status + a redirect to C, never re-opens negotiation</div></div>
+        <div class="tool prod"><span class="tool-badge badge-prod">Live</span><div class="tool-name">Line C — Coordination</div><div class="tool-role">POST-PAYMENT only. Opens after escrow is held, via a trusted B→C tap (anti-spoof — C never cold-messages). Here the anti-poaching mask is deliberately reversed: real contact revealed once, atomically, per party</div></div>
       </div>
     </div>
 
     <div class="layer">
       <div class="layer-label">Frontend</div>
       <div class="layer-content">
-        <div class="tool prod"><span class="tool-badge badge-prod">Live</span><div class="tool-name">Next.js 14 + TypeScript</div><div class="tool-role">Tailwind CSS · web app on Vercel</div></div>
-        <div class="tool prod"><span class="tool-badge badge-prod">Live</span><div class="tool-name">React Native + Expo</div><div class="tool-role">Mobile app · Expo SDK 56</div></div>
+        <div class="tool prod"><span class="tool-badge badge-prod">Live</span><div class="tool-name">Next.js + TypeScript</div><div class="tool-role">Marketing site on Netlify · Tailwind CSS</div></div>
+        <div class="tool prod"><span class="tool-badge badge-prod">Live</span><div class="tool-name">React Native</div><div class="tool-role">Mobile app</div></div>
+        <div class="tool prod"><span class="tool-badge badge-prod">Live</span><div class="tool-name">Operator Dashboard</div><div class="tool-role">Worker / hirer verification · comprobante review · live line-C supervision &amp; takeover</div></div>
       </div>
     </div>
 
     <div class="layer">
       <div class="layer-label">Backend</div>
       <div class="layer-content">
-        <div class="tool prod"><span class="tool-badge badge-prod">Live</span><div class="tool-name">Python · FastAPI</div><div class="tool-role">Stateful deal-flow API · hosted on Render</div></div>
+        <div class="tool prod"><span class="tool-badge badge-prod">Live</span><div class="tool-name">Python · FastAPI</div><div class="tool-role">Three-line webhook router · stateful deal-flow API · encrypted WhatsApp Flow endpoint · hosted on Render</div></div>
       </div>
     </div>
 
     <div class="layer">
       <div class="layer-label">Database</div>
       <div class="layer-content">
-        <div class="tool prod"><span class="tool-badge badge-prod">Live</span><div class="tool-name">Supabase · PostgreSQL</div><div class="tool-role">Threaded inboxes · deals · workers · reputation · escrow ledger</div></div>
+        <div class="tool prod"><span class="tool-badge badge-prod">Live</span><div class="tool-name">Supabase · PostgreSQL</div><div class="tool-role">Typed, versioned conversation state (no jsonb scratchpad) · deals · workers · reputation · escrow ledger · seen_messages dedupe (at-least-once)</div></div>
+        <div class="tool prod"><span class="tool-badge badge-prod">Live</span><div class="tool-name">Supabase Storage</div><div class="tool-role">Private bucket · signed URLs · DPI documents &amp; comprobantes</div></div>
       </div>
     </div>
 
     <div class="layer">
       <div class="layer-label">Deal-Flow Engine</div>
       <div class="layer-content">
-        <div class="tool prod"><span class="tool-badge badge-prod">Live</span><div class="tool-name">State Machine</div><div class="tool-role">propuesta → acceptance → escrow → in-job pings → completion → rating</div></div>
-        <div class="tool prod"><span class="tool-badge badge-prod">Live</span><div class="tool-name">Commission Engine</div><div class="tool-role">Three tiers (15% / 17% / 20%) computed on top of the worker's quote</div></div>
-        <div class="tool prod"><span class="tool-badge badge-prod">Live</span><div class="tool-name">Reputation Ladder</div><div class="tool-role">Four-rung worker ladder affecting commission &amp; payout speed</div></div>
-        <div class="tool plan"><span class="tool-badge badge-plan">Pre-Launch</span><div class="tool-name">Escrow &amp; Disputes</div><div class="tool-role">Three-party confirmation before release · refund machinery</div></div>
+        <div class="tool prod"><span class="tool-badge badge-prod">Live</span><div class="tool-name">State Machine</div><div class="tool-role">Typed &amp; versioned state · ONE source of truth for price, one parser, one status enum · reverse-auction bids · no second pricing path</div></div>
+        <div class="tool prod"><span class="tool-badge badge-prod">Live</span><div class="tool-name">Atomic Deal Lock</div><div class="tool-role">Exactly-once lock_deal claim (INSERT…RETURNING) — NOT the at-least-once dedupe ledger. Locks the job, holds escrow, taps C</div></div>
+        <div class="tool prod"><span class="tool-badge badge-prod">Live</span><div class="tool-name">Commission Engine</div><div class="tool-role">Tiered commission computed on top of the worker's own bid</div></div>
+        <div class="tool prod"><span class="tool-badge badge-prod">Live</span><div class="tool-name">Reputation Ladder</div><div class="tool-role">Four-rung worker ladder · gates escrow release &amp; payout speed</div></div>
       </div>
     </div>
 
     <div class="layer">
-      <div class="layer-label">AI / ML</div>
+      <div class="layer-label">Payments &amp; Escrow</div>
       <div class="layer-content">
-        <div class="tool prod"><span class="tool-badge badge-prod">Live</span><div class="tool-name">Google Gemini</div><div class="tool-role">Intent parsing · conversational intake</div></div>
-        <div class="tool prod"><span class="tool-badge badge-prod">Live</span><div class="tool-name">Anthropic Claude</div><div class="tool-role">Haiku for report text · Sonnet for job-photo analysis</div></div>
-        <div class="tool prod"><span class="tool-badge badge-prod">Live</span><div class="tool-name">Google Vision</div><div class="tool-role">ID / document OCR at onboarding</div></div>
-        <div class="tool prod"><span class="tool-badge badge-prod">Live</span><div class="tool-name">Google Speech STT / TTS</div><div class="tool-role">Voice-note transcription &amp; replies</div></div>
-        <div class="tool plan"><span class="tool-badge badge-plan">Gated</span><div class="tool-name">AWS Rekognition</div><div class="tool-role">Face match on ID verification (feature-gated)</div></div>
+        <div class="tool prod"><span class="tool-badge badge-prod">Live</span><div class="tool-name">Escrow Hold</div><div class="tool-role">50% anticipo → comprobante upload (WhatsApp Flow, admin-reviewed) → escrow held atomically → Line C opens</div></div>
+        <div class="tool prod"><span class="tool-badge badge-prod">Live</span><div class="tool-name">Bank Transfer</div><div class="tool-role">Cashless deposit · proof-of-payment comprobante · no bank account required</div></div>
+        <div class="tool prod"><span class="tool-badge badge-prod">Live</span><div class="tool-name">Tigo Money</div><div class="tool-role">Mobile-money rail</div></div>
+        <div class="tool plan"><span class="tool-badge badge-plan">Pre-Launch</span><div class="tool-name">Disputes &amp; Refunds</div><div class="tool-role">Refund machinery on top of the atomic escrow hold</div></div>
+      </div>
+    </div>
+
+    <div class="layer">
+      <div class="layer-label">Line-C Supervision</div>
+      <div class="layer-content">
+        <div class="tool prod"><span class="tool-badge badge-prod">Live</span><div class="tool-name">Capture &amp; Coalesce</div><div class="tool-role">Guatemalan workers send many short messages → one coalesced "utterance"</div></div>
+        <div class="tool prod"><span class="tool-badge badge-prod">Live</span><div class="tool-name">Haiku "Needs-Human?" Triage</div><div class="tool-role">On each closed worker utterance → dashboard alert. Deterministic-first, and it ERRS TOWARD ALERTING — an AI failure raises a soft alert, never silently drops</div></div>
+        <div class="tool prod"><span class="tool-badge badge-prod">Live</span><div class="tool-name">4-Hour Digests</div><div class="tool-role">Scheduled hirer digest, only if there's substance · urgent items raise immediately</div></div>
+        <div class="tool prod"><span class="tool-badge badge-prod">Live</span><div class="tool-name">Human Takeover</div><div class="tool-role">Per-job C thread · bot goes silent · operator replies as CHAN-C, signaled to the user</div></div>
+        <div class="tool prod"><span class="tool-badge badge-prod">Live</span><div class="tool-name">Grounded Hirer Q&amp;A</div><div class="tool-role">Answered ONLY from the project record — never a confident wrong answer</div></div>
+      </div>
+    </div>
+
+    <div class="layer">
+      <div class="layer-label">AI Seam</div>
+      <div class="layer-content">
+        <div class="tool seam"><span class="tool-badge badge-seam">Seam</span><div class="tool-name">One Shared AI Client</div><div class="tool-role">Deterministic-first → LLM-on-miss · flag-gated · one seam for every model call</div></div>
+        <div class="tool prod"><span class="tool-badge badge-prod">Live</span><div class="tool-name">Anthropic Haiku</div><div class="tool-role">Triage · summaries · ranking</div></div>
+        <div class="tool prod"><span class="tool-badge badge-prod">Live</span><div class="tool-name">Anthropic Claude</div><div class="tool-role">Grounded hirer Q&amp;A</div></div>
+        <div class="tool prod"><span class="tool-badge badge-prod">Live</span><div class="tool-name">Google Vision OCR</div><div class="tool-role">DPI / document intake at onboarding</div></div>
       </div>
     </div>
 
@@ -175,37 +207,39 @@
     <div class="layer">
       <div class="layer-label">Maps &amp; Location</div>
       <div class="layer-content">
-        <div class="tool prod"><span class="tool-badge badge-prod">Live</span><div class="tool-name">Google Maps Platform</div><div class="tool-role">Maps JavaScript · Geocoding · Places · in-job location pings</div></div>
-      </div>
-    </div>
-
-    <div class="layer">
-      <div class="layer-label">Payments</div>
-      <div class="layer-content">
-        <div class="tool prod"><span class="tool-badge badge-prod">Live</span><div class="tool-name">Banrural Transfer</div><div class="tool-role">Cashless pickup · no bank account required</div></div>
-        <div class="tool prod"><span class="tool-badge badge-prod">Live</span><div class="tool-name">Tigo Money</div><div class="tool-role">USSD mobile-money backup rail</div></div>
+        <div class="tool prod"><span class="tool-badge badge-prod">Live</span><div class="tool-name">Google Maps Platform</div><div class="tool-role">Geocoding · Places · worker location for job matching</div></div>
       </div>
     </div>
 
     <div class="layer">
       <div class="layer-label">Infra / CI</div>
       <div class="layer-content">
-        <div class="tool prod"><span class="tool-badge badge-prod">Live</span><div class="tool-name">GitHub</div><div class="tool-role">Code · CI/CD · deterministic simulation harness for $0 conversation tests</div></div>
+        <div class="tool prod"><span class="tool-badge badge-prod">Live</span><div class="tool-name">GitHub</div><div class="tool-role">Code · CI/CD · auto-deploy to Render</div></div>
+        <div class="tool prod"><span class="tool-badge badge-prod">Live</span><div class="tool-name">Sim / Verify Harness</div><div class="tool-role">Deterministic $0 conversation tests · SQL ⇔ in-memory store PARITY · every slice ships a verify that fails on regression</div></div>
+        <div class="tool prod"><span class="tool-badge badge-prod">Live</span><div class="tool-name">Feature Flags</div><div class="tool-role">feature_flags table · risky behavior default-safe · flag-gated rollout</div></div>
       </div>
     </div>
 
   </div>
 
   <div class="section">
-    <div class="section-title">Vendor Seams — Swap Without Touching Business Logic</div>
+    <div class="section-title">Seams — Swap Without Touching Business Logic</div>
     <div class="seam-grid">
       <div class="seam-card">
         <div class="seam-flow">
-          <span class="seam-from">TwilioProvider</span>
+          <span class="seam-from">AIClient</span>
           <span class="seam-arrow">———▶</span>
-          <span class="seam-to">MetaProvider</span>
+          <span class="seam-to">Haiku · Claude · Vision</span>
         </div>
-        <div class="seam-desc">MESSAGING_PROVIDER=meta in .env<br>Same interface for list/button/template sends.<br>Migrate Twilio → Meta Cloud API, zero caller changes.</div>
+        <div class="seam-desc">One shared AI seam, flag-gated.<br>Deterministic-first → LLM-on-miss.<br>Triage/summaries (Haiku), grounded Q&amp;A (Claude), OCR (Vision) behind one interface.</div>
+      </div>
+      <div class="seam-card">
+        <div class="seam-flow">
+          <span class="seam-from">ConversationStore</span>
+          <span class="seam-arrow">———▶</span>
+          <span class="seam-to">SQL ⇔ InMemory</span>
+        </div>
+        <div class="seam-desc">Same shape / type / None-semantics in both backends.<br>Parity assertion per slice — the sim can't pass while Postgres diverges.</div>
       </div>
       <div class="seam-card">
         <div class="seam-flow">
@@ -219,43 +253,50 @@
   </div>
 
   <div class="section">
-    <div class="section-title">Provider-Seam Pattern</div>
+    <div class="section-title">Atomic Exactly-Once Deal Lock</div>
     <div class="code-block">
-      <span class="code-comment"># config/providers.py — swappable vendors from day one</span><br><br>
-      <span class="code-key">MESSAGING_PROVIDER</span> = <span class="code-fn">os.getenv</span>(<span class="code-str">"MESSAGING_PROVIDER"</span>, <span class="code-str">"twilio"</span>)&nbsp;&nbsp;<span class="code-comment"># flip to "meta"</span><br>
-      <span class="code-key">CERTIFICADOR</span> = <span class="code-fn">os.getenv</span>(<span class="code-str">"CERTIFICADOR"</span>, <span class="code-str">"infile"</span>)<br><br>
-      <span class="code-key">def</span> <span class="code-fn">get_messenger</span>():<br>
-      &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-key">if</span> MESSAGING_PROVIDER == <span class="code-str">"twilio"</span>: <span class="code-key">return</span> <span class="code-fn">TwilioProvider</span>()<br>
-      &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-key">if</span> MESSAGING_PROVIDER == <span class="code-str">"meta"</span>:&nbsp;&nbsp;&nbsp;<span class="code-key">return</span> <span class="code-fn">MetaProvider</span>()&nbsp;&nbsp;<span class="code-comment"># business logic never changes</span>
+      <span class="code-comment"># deals/lock.py — exactly-once claim, NOT the at-least-once dedupe ledger</span><br><br>
+      <span class="code-key">def</span> <span class="code-fn">lock_deal</span>(job_id, worker_id, price):<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;row = <span class="code-fn">db.execute</span>(<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-str">"INSERT INTO deal_locks (job_id, worker_id, price) "</span><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-str">"VALUES (%s, %s, %s) ON CONFLICT (job_id) DO NOTHING "</span><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-str">"RETURNING id"</span>)<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-key">if</span> row <span class="code-key">is</span> <span class="code-val">None</span>:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-comment"># another bid already locked this job</span><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-key">return</span> <span class="code-fn">AlreadyLocked</span><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-fn">hold_escrow</span>(job_id)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-comment"># one source of truth for price</span><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-fn">open_line_c</span>(job_id)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-comment"># trusted B→C tap — C never cold-messages</span><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-key">return</span> <span class="code-fn">Locked</span>
     </div>
   </div>
 
   <div class="section">
     <div class="section-title">Hosting — Lean, Managed Services</div>
     <div class="hosting-grid">
-      <div class="hosting-card"><div class="hosting-platform">Render.com</div><div class="hosting-what">FastAPI Backend</div><div class="hosting-desc">Deal-flow API + webhooks.<br>Auto-deploys from GitHub.</div></div>
-      <div class="hosting-card"><div class="hosting-platform">Vercel</div><div class="hosting-what">Next.js Web App</div><div class="hosting-desc">Admin + hirer web console.<br>Edge-hosted, CI on push.</div></div>
-      <div class="hosting-card"><div class="hosting-platform">Supabase</div><div class="hosting-what">PostgreSQL</div><div class="hosting-desc">Managed Postgres + auth.<br>Row-level security.</div></div>
-      <div class="hosting-card"><div class="hosting-platform">Netlify</div><div class="hosting-what">Marketing + DNS</div><div class="hosting-desc">Landing site &amp; domain routing.</div></div>
+      <div class="hosting-card"><div class="hosting-platform">Render.com</div><div class="hosting-what">FastAPI Backend</div><div class="hosting-desc">Three-line router, deal-flow API, Meta webhooks + encrypted Flow endpoint.<br>Auto-deploys from GitHub.</div></div>
+      <div class="hosting-card"><div class="hosting-platform">Supabase</div><div class="hosting-what">Postgres + Storage</div><div class="hosting-desc">Managed Postgres, RLS.<br>Private Storage bucket (signed URLs) for DPI docs &amp; comprobantes.</div></div>
+      <div class="hosting-card"><div class="hosting-platform">Netlify</div><div class="hosting-what">Next.js Marketing + DNS</div><div class="hosting-desc">Landing site &amp; domain routing.<br>CI on push.</div></div>
+      <div class="hosting-card"><div class="hosting-platform">Next.js</div><div class="hosting-what">Operator Dashboard</div><div class="hosting-desc">Verification, comprobante review, live line-C supervision &amp; takeover.</div></div>
     </div>
   </div>
 
   <div class="section">
     <div class="section-title">End-to-End Deal Flow</div>
     <div class="flow">
-      <div class="flow-node h1">Worker / Hirer<br><small style="font-size:10px;opacity:.6">WhatsApp thread</small></div>
+      <div class="flow-node h1">Line A<br><small style="font-size:10px;opacity:.6">onboarding · DPI verify</small></div>
       <div class="flow-arrow">→</div>
-      <div class="flow-node">Twilio WABA</div>
+      <div class="flow-node h1">Line B<br><small style="font-size:10px;opacity:.6">post job · reverse-auction · masked relay</small></div>
       <div class="flow-arrow">→</div>
-      <div class="flow-node">FastAPI</div>
+      <div class="flow-node h2">Deal Lock<br><small style="font-size:10px;opacity:.6">WhatsApp Flow · atomic exactly-once</small></div>
       <div class="flow-arrow">→</div>
-      <div class="flow-node h2">Deal-Flow Engine<br><small style="font-size:10px;opacity:.6">quote · commission</small></div>
+      <div class="flow-node">50% Anticipo<br><small style="font-size:10px;opacity:.6">comprobante · admin review</small></div>
       <div class="flow-arrow">→</div>
-      <div class="flow-node">Supabase</div>
+      <div class="flow-node h3">Escrow Held</div>
       <div class="flow-arrow">→</div>
-      <div class="flow-node h3">3-Party Confirm<br><small style="font-size:10px;opacity:.6">worker · hirer · admin</small></div>
+      <div class="flow-node h1">Line C Opens<br><small style="font-size:10px;opacity:.6">B→C tap · contact revealed once</small></div>
       <div class="flow-arrow">→</div>
-      <div class="flow-node h1">Escrow → FEL Invoice</div>
+      <div class="flow-node h2">AI Supervision<br><small style="font-size:10px;opacity:.6">coalesce · Haiku triage · 4h digest</small></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node h3">Completion<br><small style="font-size:10px;opacity:.6">escrow release · reputation · FEL invoice</small></div>
     </div>
   </div>
 
