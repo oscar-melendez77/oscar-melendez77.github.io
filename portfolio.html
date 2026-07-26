@@ -74,6 +74,21 @@
 
     projects: [
       {
+        name:        "CHAN-C",
+        badge:       "In Production",
+        description: `A WhatsApp-first, commission-based marketplace that formalizes Guatemala's informal construction labor market — connecting vetted plumbers, electricians, carpenters, and masons with companies and homeowners. Runs on THREE dedicated WhatsApp lines: A (onboarding & general), B (job posting, reverse-auction negotiation & the atomic deal lock), and C (post-payment coordination). Escrow-protected payments, reputation vetting, and SAT-compliant electronic invoicing (FEL). Sole technical lead across architecture, backend, the three-line routing engine, WhatsApp Cloud API integration, the operator dashboard, and the mobile app. Co-founder Cecilia L. leads art & design.`,
+        highlights: [
+          "Three-line A/B/C routing (Meta WhatsApp Cloud API) with a stateful, typed deal-flow engine — one source of truth for price, atomic exactly-once deal lock",
+          "Post-payment coordination line (C): capture + AI triage (Haiku), 4-hour digests, human takeover, and grounded hirer Q&A — never a confident wrong answer",
+          "Escrow + tiered commission engine with a four-rung worker reputation ladder; masked anti-poaching relay that reveals contact only after payment",
+          "Deterministic sim/verify harness (SQL⇔in-memory parity) + operator dashboard: worker/hirer verification, comprobante review, and live supervision",
+        ],
+        link:  "https://wa.me/5025XXXXXXXX",   // I will edit the real number after
+        label: "Chat on WhatsApp",
+        archLink: "chan-c-architecture.html",
+        tags:  ["Python", "FastAPI", "Next.js", "React Native", "Supabase", "WhatsApp Cloud API", "Haiku", "Claude", "Google Vision OCR", "FEL"],
+      },
+      {
         name:        "SoundPulse — PulseIQ",
         badge:       "Live",
         description: `An end-to-end data platform that correlates world news sentiment
@@ -104,26 +119,6 @@ week's dominant mood archetype using XGBoost + SHAP.`,
         label:    "View Dashboard",
         archLink: "pharmawatch-architecture.html",
         tags:  ["Python", "Scala", "Spark", "Iceberg", "Snowflake", "BigQuery", "dbt", "Airflow", "Kafka", "LightGBM", "MLflow", "LangChain", "Groq", "FastAPI"],
-      },
-      {
-        name:        "CHAN-C",
-        badge:       "In Production",
-        description: `A WhatsApp-first, commission-based marketplace connecting vetted informal construction workers — plumbers, electricians, carpenters, masons — with companies and homeowners in Guatemala City. Formalizes an informal labor market through reputation vetting, escrow-protected payments, and SAT-compliant electronic invoicing (FEL). Sole technical lead across architecture, backend, frontend, WhatsApp integration, and the mobile app. Co-founder Cecilia L. leads art & design.`,
-        highlights: [
-          "Conversational commerce over WhatsApp backed by a stateful deal-flow engine",
-          "Tiered commission engine + four-rung worker reputation ladder with escrow release",
-          "AI intake & daily progress reports — Gemini, Claude, Google Vision OCR",
-          "Vendor-agnostic messaging/invoicing seams + deterministic simulation harness",
-        ],
-        link:  "#",
-        label: "Private",
-        waEnc: {
-          salt: "ao8ElbU/aiheKKHylAKXbQ==",
-          iv:   "zg4yGAj46wPO7UZZ",
-          ct:   "BSlVevnCwY+QVoFM6r8g1SpkEA2lpP7fHTCIRok8goC+u1VlIz+u6Rc=",
-        },
-        archLink: "chan-c-architecture.html",
-        tags:  ["Python", "FastAPI", "Next.js", "React Native", "Supabase", "Twilio API", "Gemini", "Claude", "Google Cloud", "FEL"],
       },
       {
         name:        "Más Watts",
