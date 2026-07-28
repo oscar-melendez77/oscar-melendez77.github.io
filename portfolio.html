@@ -136,6 +136,9 @@ week's dominant mood archetype using XGBoost + SHAP.`,
         ],
         link:  "https://oscar-melendez77.github.io/soundpulse-pipeline/",
         label: "View Dashboard",
+        // repo: add this line to any project to get a "View Repository" button.
+        // Delete the line and the button disappears.
+        repo:  "https://github.com/oscar-melendez77/soundpulse-pipeline",
         tags:  ["Python", "BigQuery", "Prefect", "dbt", "XGBoost", "NLP", "GCP"],
       },
       {
@@ -150,6 +153,7 @@ week's dominant mood archetype using XGBoost + SHAP.`,
         ],
         link:     "https://oscar-melendez77.github.io/PharmaWatch/",
         label:    "View Dashboard",
+        repo:     "https://github.com/oscar-melendez77/PharmaWatch",
         archLink: "pharmawatch-architecture.html",
         tags:  ["Python", "Scala", "Spark", "Iceberg", "Snowflake", "BigQuery", "dbt", "Airflow", "Kafka", "LightGBM", "MLflow", "LangChain", "Groq", "FastAPI"],
       },
@@ -675,6 +679,8 @@ week's dominant mood archetype using XGBoost + SHAP.`,
       : `<span class="btn disabled">${p.label}</span>`;
     const arch = p.archLink
       ? `<a class="btn ghost" href="${p.archLink}" target="_blank" rel="noopener">Architecture ↗</a>` : "";
+    const repo = p.repo
+      ? `<a class="btn ghost" href="${p.repo}" target="_blank" rel="noopener">View Repository ↗</a>` : "";
     const wa = p.waEnc
       ? `<button type="button" class="btn solid wa-locked" data-salt="${p.waEnc.salt}" data-iv="${p.waEnc.iv}" data-ct="${p.waEnc.ct}">Chat on WhatsApp 🔒</button>` : "";
     const item = document.createElement("div");
@@ -689,7 +695,7 @@ week's dominant mood archetype using XGBoost + SHAP.`,
         <p class="work-desc">${p.description}</p>
         <ul class="work-hl">${p.highlights.map(h => `<li>${h}</li>`).join("")}</ul>
         <div class="work-tags">${p.tags.map(t => `<span class="work-tag">${t}</span>`).join("")}</div>
-        <div class="work-cta">${primary}${wa}${arch}</div>
+        <div class="work-cta">${primary}${wa}${repo}${arch}</div>
       </div>`;
     wl.appendChild(item);
   });
