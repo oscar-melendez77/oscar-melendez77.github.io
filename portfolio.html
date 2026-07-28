@@ -84,6 +84,25 @@
        Leave featuredVideo as "" to instead open on whatever your
        newest upload is, automatically.
 
+       !! BEFORE YOU SWAP IN A NEW VIDEO, CHECK IT PLAYS HERE !!
+       A music publisher can block one of your covers from playing
+       on any site other than YouTube, even though the video is
+       public and your channel allows embedding. There is no
+       setting on your side that overrides it. As of Jul 2026:
+
+         Moon River      plays here   <- currently featured
+         Vienna          blocked by LatinAutor - UMPG
+         You and Me      blocked by LatinAutor - UMPG
+
+       A blocked video shows a grey "Video unavailable" box instead
+       of the player, so always load the page once after changing
+       featuredVideo. Blocks can also appear later on a video that
+       worked before -- if the box shows up, pick another video.
+
+       queueChannel lines the rest of your uploads up behind the
+       featured video. It is off because most of the queue is
+       currently blocked, so skipping ahead hits the grey box.
+
        If you ever change channels: take the channel ID from your
        channel URL (youtube.com/channel/UCxxxxxxxx), put it in
        channelId, then in uploadsPlaylist write the SAME id but
@@ -97,7 +116,9 @@
       handle:          "josuemel91",
       channelId:       "UC50ehg4gqRfmPcTo1_pUTjg",
       uploadsPlaylist: "UU50ehg4gqRfmPcTo1_pUTjg",
-      featuredVideo:   "q73JIh_usYE",   // Vienna - Billy Joel
+      featuredVideo:   "M32EbXxizGs",   // Moon River - Henry Mancini
+      featuredTitle:   "Moon River",    // shown on the channel card
+      queueChannel:    false,
       heading:         "At the Piano",
       blurb:           `Away from the pipelines I play. Mostly jazz standards, film themes and pop
 arrangements, recorded at home in one take. It is the same instinct that runs through my work --
@@ -453,6 +474,11 @@ week's dominant mood archetype using XGBoost + SHAP.`,
     }
     .tube-frame:hover { box-shadow: 6px 6px 0 var(--aqua); transform: translate(2px,2px); }
     .tube-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; display: block; }
+    .tube-note {
+      font-family: var(--mono); font-size: .72rem; line-height: 1.5;
+      color: var(--ink-2); margin-top: 1rem; max-width: 62ch;
+    }
+    .tube-note a { color: var(--blue); text-decoration: none; border-bottom: 1.5px solid var(--blue); }
     .music-card { align-self: stretch; }
     .music-blurb { font-size: .92rem; color: var(--ink-2); line-height: 1.6; text-align: justify; hyphens: auto; }
     @media (max-width: 900px){
@@ -558,10 +584,16 @@ week's dominant mood archetype using XGBoost + SHAP.`,
       <span class="sec-num">04</span><h2 class="sec-title" id="music-title"></h2><span class="sec-rule"></span>
     </div>
     <div class="music-grid">
-      <div class="tube-frame">
-        <iframe id="tube" title="" loading="lazy" allowfullscreen
-                referrerpolicy="strict-origin-when-cross-origin"
-                allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe>
+      <div class="tube-col">
+        <div class="tube-frame">
+          <iframe id="tube" title="" loading="lazy" allowfullscreen
+                  referrerpolicy="strict-origin-when-cross-origin"
+                  allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe>
+        </div>
+        <p class="tube-note">
+          Some covers are blocked from playing outside YouTube by their publishers —
+          <a id="tube-note-link" href="#" target="_blank" rel="noopener">hear those on the channel</a>.
+        </p>
       </div>
       <aside class="card music-card">
         <div class="fact-title">The Channel</div>
@@ -570,7 +602,7 @@ week's dominant mood archetype using XGBoost + SHAP.`,
           <span class="fact-v"><a id="yt-handle" href="#" target="_blank" rel="noopener"></a></span>
         </div>
         <div class="fact-row">
-          <span class="fact-k">Playing</span><span class="fact-v">Solo piano</span>
+          <span class="fact-k">Playing</span><span class="fact-v" id="yt-featured">Solo piano</span>
         </div>
         <div class="fact-block">
           <p class="music-blurb" id="music-blurb"></p>
@@ -706,19 +738,22 @@ week's dominant mood archetype using XGBoost + SHAP.`,
   $("music-title").textContent = yt.heading;
   $("music-blurb").textContent = yt.blurb;
   $("music-tags").innerHTML = yt.tags.map(t => `<span class="work-tag">${t}</span>`).join("");
-  // Open on the featured video, with the uploads playlist queued behind it so the
-  // whole channel is still reachable in the player. With no featured video we fall
-  // back to "videoseries", which just opens on the newest upload.
+  // Open on the featured video. "videoseries" (no featured video) opens on the
+  // newest upload and always needs the playlist; otherwise the playlist is only
+  // queued behind it when queueChannel is on -- see the note in the config block.
   // nocookie host = nothing tracked until a visitor presses play.
   const tube = $("tube");
-  tube.src = "https://www.youtube-nocookie.com/embed/"
-           + (yt.featuredVideo || "videoseries")
-           + "?list=" + yt.uploadsPlaylist + "&rel=0";
+  const vid = yt.featuredVideo || "videoseries";
+  const qs  = ["rel=0"];
+  if (!yt.featuredVideo || yt.queueChannel) qs.push("list=" + yt.uploadsPlaylist);
+  tube.src = "https://www.youtube-nocookie.com/embed/" + vid + "?" + qs.join("&");
   tube.title = yt.handle + " on YouTube";
   const ytA = $("yt-handle");
   ytA.textContent = "@" + yt.handle;
   ytA.href = ytChannelUrl;
   $("yt-btn").href = ytChannelUrl;
+  $("tube-note-link").href = ytChannelUrl;
+  if (yt.featuredTitle) $("yt-featured").textContent = yt.featuredTitle;
 
   // Contact
   const cm = $("contact-mail");
