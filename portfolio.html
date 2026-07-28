@@ -72,6 +72,30 @@
     /* ── Visualization Tools ─────────────────────────── */
     vizTools: ["Tableau", "Power BI", "Looker Studio", "Streamlit", "Matplotlib", "Plotly"],
 
+    /* ── YouTube channel ───────────────────────────────
+       The player shows your ENTIRE channel, newest video first.
+       New uploads appear here automatically -- nothing to edit.
+
+       If you ever change channels: take the channel ID from your
+       channel URL (youtube.com/channel/UCxxxxxxxx), put it in
+       channelId, then in uploadsPlaylist write the SAME id but
+       swap the leading "UC" for "UU". That is YouTube's built-in
+       "all my uploads" playlist.
+
+       heading / blurb are free text -- change them if the channel
+       ever becomes about something other than piano.
+    ──────────────────────────────────────────────────────── */
+    youtube: {
+      handle:          "josuemel91",
+      channelId:       "UC50ehg4gqRfmPcTo1_pUTjg",
+      uploadsPlaylist: "UU50ehg4gqRfmPcTo1_pUTjg",
+      heading:         "At the Piano",
+      blurb:           `Away from the pipelines I play. Mostly jazz standards, film themes and pop
+arrangements, recorded at home in one take. It is the same instinct that runs through my work --
+listening for structure in something that first arrives as noise.`,
+      tags:            ["Piano", "Jazz Standards", "Film Scores", "Arrangement", "Home Recording"],
+    },
+
     projects: [
       {
         name:        "CHAN-C",
@@ -406,6 +430,22 @@ week's dominant mood archetype using XGBoost + SHAP.`,
       .hero-photo-wrap { display: none; }
     }
 
+    /* ─────────── MUSIC / YOUTUBE ─────────── */
+    .music-grid { display: grid; grid-template-columns: 1.6fr 1fr; gap: 3rem; align-items: start; }
+    .tube-frame {
+      position: relative; aspect-ratio: 16 / 9;
+      border: var(--edge); background: var(--ink);
+      box-shadow: 10px 10px 0 var(--accent);
+      transition: box-shadow .2s ease, transform .2s ease;
+    }
+    .tube-frame:hover { box-shadow: 6px 6px 0 var(--aqua); transform: translate(2px,2px); }
+    .tube-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; display: block; }
+    .music-card { align-self: stretch; }
+    .music-blurb { font-size: .92rem; color: var(--ink-2); line-height: 1.6; text-align: justify; hyphens: auto; }
+    @media (max-width: 900px){
+      .music-grid { grid-template-columns: 1fr; gap: 2rem; }
+    }
+
     /* ─────────── CONTACT / FOOTER ─────────── */
     #contact { padding: 6rem 0; text-align: center; }
     .contact-k { font-family: var(--mono); font-size: .8rem; text-transform: uppercase;
@@ -439,7 +479,8 @@ week's dominant mood archetype using XGBoost + SHAP.`,
     <li><a href="#about"><span class="idx">01</span>About</a></li>
     <li><a href="#skills"><span class="idx">02</span>Skills</a></li>
     <li><a href="#work"><span class="idx">03</span>Work</a></li>
-    <li><a href="#contact"><span class="idx">04</span>Contact</a></li>
+    <li><a href="#music"><span class="idx">04</span>Music</a></li>
+    <li><a href="#contact"><span class="idx">05</span>Contact</a></li>
   </ul>
 </nav>
 
@@ -496,6 +537,38 @@ week's dominant mood archetype using XGBoost + SHAP.`,
       <span class="sec-num">03</span><h2 class="sec-title">Selected Work</h2><span class="sec-rule"></span>
     </div>
     <div id="work-list"></div>
+  </section>
+
+  <!-- ── MUSIC / YOUTUBE ── -->
+  <section class="block rv" id="music">
+    <div class="sec-head">
+      <span class="sec-num">04</span><h2 class="sec-title" id="music-title"></h2><span class="sec-rule"></span>
+    </div>
+    <div class="music-grid">
+      <div class="tube-frame">
+        <iframe id="tube" title="" loading="lazy" allowfullscreen
+                referrerpolicy="strict-origin-when-cross-origin"
+                allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe>
+      </div>
+      <aside class="card music-card">
+        <div class="fact-title">The Channel</div>
+        <div class="fact-row">
+          <span class="fact-k">Handle</span>
+          <span class="fact-v"><a id="yt-handle" href="#" target="_blank" rel="noopener"></a></span>
+        </div>
+        <div class="fact-row">
+          <span class="fact-k">Playing</span><span class="fact-v">Solo piano</span>
+        </div>
+        <div class="fact-block">
+          <p class="music-blurb" id="music-blurb"></p>
+          <div class="work-tags" id="music-tags" style="margin:1rem 0 0;"></div>
+        </div>
+        <div class="fact-block">
+          <a class="btn solid" id="yt-btn" href="#" target="_blank" rel="noopener"
+             style="width:100%;justify-content:center;">Open on YouTube ↗</a>
+        </div>
+      </aside>
+    </div>
   </section>
 
   <!-- ── CONTACT ── -->
@@ -611,6 +684,23 @@ week's dominant mood archetype using XGBoost + SHAP.`,
       </div>`;
     wl.appendChild(item);
   });
+
+  // Music / YouTube
+  const yt = PROFILE.youtube;
+  const ytChannelUrl = "https://www.youtube.com/channel/" + yt.channelId;
+  $("music-title").textContent = yt.heading;
+  $("music-blurb").textContent = yt.blurb;
+  $("music-tags").innerHTML = yt.tags.map(t => `<span class="work-tag">${t}</span>`).join("");
+  // "videoseries?list=UU..." plays the channel's uploads playlist -- newest first,
+  // so the embed stays current on its own. nocookie host = no tracking until play.
+  const tube = $("tube");
+  tube.src = "https://www.youtube-nocookie.com/embed/videoseries?list="
+           + yt.uploadsPlaylist + "&rel=0";
+  tube.title = yt.handle + " on YouTube";
+  const ytA = $("yt-handle");
+  ytA.textContent = "@" + yt.handle;
+  ytA.href = ytChannelUrl;
+  $("yt-btn").href = ytChannelUrl;
 
   // Contact
   const cm = $("contact-mail");
