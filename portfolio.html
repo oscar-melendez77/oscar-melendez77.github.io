@@ -73,8 +73,16 @@
     vizTools: ["Tableau", "Power BI", "Looker Studio", "Streamlit", "Matplotlib", "Plotly"],
 
     /* ── YouTube channel ───────────────────────────────
-       The player shows your ENTIRE channel, newest video first.
-       New uploads appear here automatically -- nothing to edit.
+       The player opens on featuredVideo, and the rest of the
+       channel is queued up behind it -- viewers can skip through
+       every upload without leaving the page.
+
+       TO CHANGE WHICH VIDEO SHOWS FIRST: open the video on
+       YouTube and copy the code after "watch?v=" in the address
+       bar into featuredVideo below. That is all.
+
+       Leave featuredVideo as "" to instead open on whatever your
+       newest upload is, automatically.
 
        If you ever change channels: take the channel ID from your
        channel URL (youtube.com/channel/UCxxxxxxxx), put it in
@@ -89,6 +97,7 @@
       handle:          "josuemel91",
       channelId:       "UC50ehg4gqRfmPcTo1_pUTjg",
       uploadsPlaylist: "UU50ehg4gqRfmPcTo1_pUTjg",
+      featuredVideo:   "q73JIh_usYE",   // Vienna - Billy Joel
       heading:         "At the Piano",
       blurb:           `Away from the pipelines I play. Mostly jazz standards, film themes and pop
 arrangements, recorded at home in one take. It is the same instinct that runs through my work --
@@ -691,11 +700,14 @@ week's dominant mood archetype using XGBoost + SHAP.`,
   $("music-title").textContent = yt.heading;
   $("music-blurb").textContent = yt.blurb;
   $("music-tags").innerHTML = yt.tags.map(t => `<span class="work-tag">${t}</span>`).join("");
-  // "videoseries?list=UU..." plays the channel's uploads playlist -- newest first,
-  // so the embed stays current on its own. nocookie host = no tracking until play.
+  // Open on the featured video, with the uploads playlist queued behind it so the
+  // whole channel is still reachable in the player. With no featured video we fall
+  // back to "videoseries", which just opens on the newest upload.
+  // nocookie host = nothing tracked until a visitor presses play.
   const tube = $("tube");
-  tube.src = "https://www.youtube-nocookie.com/embed/videoseries?list="
-           + yt.uploadsPlaylist + "&rel=0";
+  tube.src = "https://www.youtube-nocookie.com/embed/"
+           + (yt.featuredVideo || "videoseries")
+           + "?list=" + yt.uploadsPlaylist + "&rel=0";
   tube.title = yt.handle + " on YouTube";
   const ytA = $("yt-handle");
   ytA.textContent = "@" + yt.handle;
