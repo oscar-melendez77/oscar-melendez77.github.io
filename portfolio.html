@@ -6,7 +6,7 @@
   <title>Oscar Melendez — Data Engineer & Data Scientist</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
   <script>
   /* ============================================================
@@ -121,9 +121,8 @@
       queueChannel:    false,
       heading:         "At the Piano",
       blurb:           `Away from the laptop, I play mostly jazz standards, film themes and pop
-arrangements, recorded at home in one take. It is the same instinct that runs through my work --
-listening for structure in something that first arrives as noise.`,
-      tags:            ["Piano", "Jazz Standards", "Film Scores", "Arrangement", "Home Recording"],
+arrangements, recorded at home in one take.`,
+      tags:            ["jazz standards", "film themes", "pop arrangements"],
     },
 
     projects: [
@@ -206,59 +205,44 @@ week's dominant mood archetype using XGBoost + SHAP.`,
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      /* palette — unchanged */
       --paper:   #dcecea;
       --paper-2: #cbe2df;
       --card:    #e8f3f1;
       --ink:     #0b1f1e;
       --ink-2:   #3c5a58;
-      --accent:  #0e7f7a;
-      --aqua:    #14a29a;
+      --accent:  #0f6f6a;   /* a shade deeper than before */
+      --mark:    #a8532b;   /* clay, used only for status */
       --blue:    #1c5fd0;
 
-      /* rules do the work that borders and shadows used to */
       --rule:      rgba(11,31,30,.15);
       --rule-mid:  rgba(11,31,30,.30);
-      --rule-firm: rgba(11,31,30,.52);
+      --rule-firm: rgba(11,31,30,.50);
 
-      --sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, Arial, sans-serif;
-      --mono: 'IBM Plex Mono', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+      --sans: 'Libre Franklin', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     }
 
     html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
     ::selection { background: var(--accent); color: var(--paper); }
 
     body {
-      background: var(--paper);
-      color: var(--ink);
-      font-family: var(--sans);
-      font-size: 16px;
-      line-height: 1.6;
-      font-variant-numeric: tabular-nums;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
+      background: var(--paper); color: var(--ink);
+      font-family: var(--sans); font-size: 16px; line-height: 1.6;
+      -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
     }
 
     a { color: inherit; }
     img { display: block; max-width: 100%; }
     :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
-    /* ── measure ─────────────────────────────────────────── */
-    .grid { width: min(1180px, 90vw); margin-inline: auto; }
-    .row  { display: grid; grid-template-columns: repeat(12, 1fr); column-gap: 28px; }
+    .grid { width: min(1140px, 90vw); margin-inline: auto; }
+    .row  { display: grid; grid-template-columns: repeat(12, 1fr); column-gap: 32px; }
     section[id] { scroll-margin-top: 4.5rem; }
 
-    /* small uppercase label, the one recurring type device */
+    /* the only micro-label left, and it is not monospaced */
     .k {
-      font-family: var(--mono); font-size: .625rem; font-weight: 400;
-      text-transform: uppercase; letter-spacing: .13em; color: var(--ink-2);
+      font-size: .6875rem; font-weight: 600; text-transform: uppercase;
+      letter-spacing: .06em; color: var(--ink-2);
     }
-
-    /* separated inline list — replaces the pill tags.
-       The dot is a real element with real spaces around it, so the browser
-       can break the line between items. A ::after dot has no whitespace next
-       to it and turns the whole list into one unbreakable run. */
-    .seq em, .sep-dot { font-style: normal; color: var(--rule-firm); }
 
     /* ── top bar ─────────────────────────────────────────── */
     .topbar {
@@ -267,95 +251,82 @@ week's dominant mood archetype using XGBoost + SHAP.`,
     }
     .topbar-in {
       display: flex; align-items: baseline; justify-content: space-between;
-      gap: 1.25rem; padding: .8rem 0; flex-wrap: wrap;
+      gap: 1.25rem; padding: .85rem 0; flex-wrap: wrap;
     }
-    .topbar-id { font-size: .8125rem; font-weight: 500; letter-spacing: -.005em; }
-    .topbar-id .sep  { color: var(--ink-2); margin: 0 .45rem; }
+    .topbar-id { font-size: .8125rem; font-weight: 600; letter-spacing: -.01em; }
     .topbar-id .role { color: var(--ink-2); font-weight: 400; }
+    .topbar-id .sep  { color: var(--rule-firm); margin: 0 .5rem; }
     .topbar-nav { display: flex; gap: 1.5rem; }
     .topbar-nav a {
-      font-family: var(--mono); font-size: .6875rem; text-transform: uppercase;
-      letter-spacing: .12em; color: var(--ink-2); text-decoration: none;
+      font-size: .8125rem; color: var(--ink-2); text-decoration: none;
       padding-bottom: 2px; border-bottom: 1px solid transparent;
     }
     .topbar-nav a:hover { color: var(--accent); border-bottom-color: var(--accent); }
 
     /* ── masthead ────────────────────────────────────────── */
-    .masthead { padding-top: 5.5rem; }
+    .masthead { padding-top: 6rem; }
     .masthead-main  { grid-column: 1 / span 8; }
     .masthead-aside { grid-column: 10 / span 3; align-self: end; }
 
-    .eyebrow {
-      font-family: var(--mono); font-size: .6875rem; text-transform: uppercase;
-      letter-spacing: .14em; color: var(--accent); margin-bottom: 1.5rem;
-    }
     h1 {
-      font-size: clamp(2.4rem, 5.6vw, 4.4rem); font-weight: 600;
-      letter-spacing: -.035em; line-height: 1.02;
+      font-size: clamp(2.4rem, 5.4vw, 4.2rem); font-weight: 700;
+      letter-spacing: -.032em; line-height: 1.04;
     }
     .lede {
-      font-size: clamp(1.05rem, 1.8vw, 1.4rem); line-height: 1.36;
-      letter-spacing: -.015em; margin-top: 1.5rem; max-width: 30ch;
+      font-size: clamp(1.05rem, 1.75vw, 1.35rem); font-weight: 400; line-height: 1.38;
+      letter-spacing: -.012em; margin-top: 1.4rem; max-width: 31ch;
     }
-    .masthead-role {
-      font-size: .9375rem; color: var(--ink-2); margin-top: 1.2rem; max-width: 50ch;
-    }
+    .masthead-role { font-size: .9375rem; color: var(--ink-2); margin-top: 1.15rem; max-width: 50ch; }
     .portrait, .portrait-ph {
-      width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: center top;
+      width: 100%; aspect-ratio: 1 / 1; object-fit: cover; object-position: center 22%;
       border: 1px solid var(--rule-firm);
     }
     .portrait-ph {
       display: flex; align-items: center; justify-content: center;
-      background: var(--card); font-size: 2rem; font-weight: 600;
-      letter-spacing: -.02em; color: var(--ink-2);
+      background: var(--card); font-size: 1.9rem; font-weight: 700; color: var(--ink-2);
     }
 
-    /* spec bar under the masthead */
     .specbar {
       margin-top: 4rem;
       border-top: 1px solid var(--rule-firm); border-bottom: 1px solid var(--rule-firm);
       display: grid; grid-template-columns: repeat(4, 1fr);
     }
-    .specbar > div { padding: .95rem 1.25rem 1rem; border-left: 1px solid var(--rule); }
+    .specbar > div { padding: 1rem 1.5rem 1.05rem; border-left: 1px solid var(--rule); }
     .specbar > div:first-child { padding-left: 0; border-left: 0; }
     .specbar .v { font-size: .875rem; margin-top: .4rem; overflow-wrap: anywhere; }
     .specbar a { text-decoration: none; border-bottom: 1px solid var(--rule-mid); }
     .specbar a:hover { color: var(--accent); border-color: var(--accent); }
+    .open-dot { color: var(--mark); }
 
     /* ── bands ───────────────────────────────────────────── */
     .band { padding: 4.75rem 0; border-bottom: 1px solid var(--rule); }
     .band:last-of-type { border-bottom: 0; }
-    .band-label { grid-column: 1 / span 3; position: sticky; top: 4.2rem; align-self: start; }
-    .band-idx {
-      font-family: var(--mono); font-size: .6875rem; letter-spacing: .1em; color: var(--accent);
+    .band-label { grid-column: 1 / span 3; position: sticky; top: 4.4rem; align-self: start; }
+    .band-title { font-size: .9375rem; font-weight: 600; letter-spacing: -.012em; }
+    /* the spine: a hairline running the height of every section */
+    .band-body {
+      grid-column: 4 / -1; border-left: 1px solid var(--rule); padding-left: 32px;
     }
-    .band-title {
-      font-family: var(--mono); font-size: .6875rem; font-weight: 500;
-      text-transform: uppercase; letter-spacing: .14em; margin-top: .45rem;
-    }
-    .band-body { grid-column: 4 / -1; }
 
     .prose { font-size: 1.0625rem; line-height: 1.62; max-width: 60ch; }
 
-    /* ── definition rows — about facts, skills, channel meta ─ */
+    /* ── definition rows ─────────────────────────────────── */
     .deflist { border-top: 1px solid var(--rule-firm); }
     .def {
-      display: grid; grid-template-columns: 13rem 1fr; gap: 1.5rem;
+      display: grid; grid-template-columns: 12rem 1fr; gap: 1.5rem;
       padding: .8rem 0; border-bottom: 1px solid var(--rule);
     }
     .def-v { font-size: .9375rem; }
     .def-v .muted { color: var(--ink-2); }
-    .deflist--tight .def { grid-template-columns: 7.5rem 1fr; gap: 1rem; }
+    .deflist--tight .def { grid-template-columns: 6.5rem 1fr; gap: 1rem; }
 
-    /* ── links — no buttons anywhere ─────────────────────── */
+    /* ── links ───────────────────────────────────────────── */
     .link {
-      display: inline; font-size: .8125rem; text-decoration: none; color: var(--ink);
+      font-size: .8125rem; text-decoration: none; color: var(--ink);
       border-bottom: 1px solid var(--rule-firm); padding-bottom: 1px;
       transition: color .15s ease, border-color .15s ease;
     }
     .link:hover { color: var(--accent); border-color: var(--accent); }
-    .link .arw { color: var(--ink-2); margin-left: .35rem; }
-    .link:hover .arw { color: var(--accent); }
     .link.is-off { color: var(--ink-2); border-bottom-style: dotted; cursor: default; }
     button.link {
       background: none; border: 0; border-bottom: 1px solid var(--rule-firm);
@@ -363,28 +334,29 @@ week's dominant mood archetype using XGBoost + SHAP.`,
     }
 
     /* ── work ────────────────────────────────────────────── */
-    .work {
-      display: grid; grid-template-columns: 2.5rem 1fr; column-gap: 1.5rem;
-      padding: 2.25rem 0; border-top: 1px solid var(--rule-firm);
-    }
+    .work { padding: 2.25rem 0; border-top: 1px solid var(--rule-firm); }
     .work:first-child { border-top: 0; padding-top: 0; }
-    .work-idx { font-family: var(--mono); font-size: .6875rem; color: var(--ink-2); padding-top: .5rem; }
-    .work-head {
-      display: flex; align-items: baseline; justify-content: space-between; gap: 1.25rem;
-      padding-bottom: .6rem; border-bottom: 1px solid var(--rule);
-    }
-    .work-name { font-size: 1.375rem; font-weight: 600; letter-spacing: -.022em; line-height: 1.2; }
+    .work-head { display: flex; align-items: baseline; justify-content: space-between; gap: 1.25rem; }
+    .work-name { font-size: 1.375rem; font-weight: 700; letter-spacing: -.022em; line-height: 1.2; }
     .work-status {
-      font-family: var(--mono); font-size: .625rem; text-transform: uppercase;
-      letter-spacing: .13em; color: var(--ink-2); white-space: nowrap;
+      font-size: .75rem; color: var(--ink-2); white-space: nowrap;
+      display: inline-flex; align-items: center; gap: .45rem;
     }
-    .work-status.is-live { color: var(--accent); }
-    .work-desc { font-size: .9375rem; color: var(--ink-2); margin-top: .9rem; max-width: 66ch; }
-    .work-hl { list-style: none; margin-top: 1.15rem; display: grid; grid-template-columns: 1fr 1fr; gap: .4rem 2rem; }
-    .work-hl li { display: grid; grid-template-columns: .8rem 1fr; column-gap: .5rem; font-size: .8125rem; line-height: 1.5; }
-    .work-hl li > span:first-child { color: var(--accent); }
-    .work-stack { font-family: var(--mono); font-size: .6875rem; color: var(--ink-2); margin-top: 1.15rem; line-height: 1.8; }
-    .work-links { margin-top: 1.35rem; display: flex; flex-wrap: wrap; gap: 1.5rem; }
+    .work-status::before {
+      content: ''; width: 6px; height: 6px; border-radius: 50%;
+      border: 1px solid var(--ink-2);
+    }
+    .work-status.is-live { color: var(--mark); }
+    .work-status.is-live::before { background: var(--mark); border-color: var(--mark); }
+    .work-desc { font-size: .9375rem; color: var(--ink-2); margin-top: .85rem; max-width: 66ch; }
+    /* highlights read as rows, so they need no bullet character at all */
+    .work-hl { list-style: none; margin-top: 1.3rem; display: grid; grid-template-columns: 1fr 1fr; gap: 0 2.5rem; }
+    .work-hl li {
+      font-size: .8125rem; line-height: 1.5; color: var(--ink-2);
+      padding: .5rem 0; border-top: 1px solid var(--rule);
+    }
+    .work-stack { font-size: .75rem; color: var(--ink-2); margin-top: 1.2rem; line-height: 1.7; }
+    .work-links { margin-top: 1.3rem; display: flex; flex-wrap: wrap; gap: 1.5rem; }
 
     /* ── music ───────────────────────────────────────────── */
     .music { display: grid; grid-template-columns: minmax(0,1.55fr) minmax(0,1fr); gap: 2.5rem; }
@@ -393,23 +365,22 @@ week's dominant mood archetype using XGBoost + SHAP.`,
     .tube-note { font-size: .75rem; line-height: 1.55; color: var(--ink-2); margin-top: .9rem; max-width: 60ch; }
     .tube-note a { text-decoration: none; border-bottom: 1px solid var(--rule-mid); color: var(--ink); }
     .tube-note a:hover { color: var(--accent); border-color: var(--accent); }
-    .music-blurb { font-size: .875rem; line-height: 1.6; color: var(--ink-2); margin-bottom: 1.6rem; }
-    .music-links { margin-top: 1.25rem; }
+    .music-blurb { font-size: .875rem; line-height: 1.6; color: var(--ink-2); margin-bottom: 1.5rem; }
+    .music-links { margin-top: 1.2rem; }
 
     /* ── contact / footer ────────────────────────────────── */
     .contact-mail {
-      display: inline-block; font-size: clamp(1.3rem, 3.6vw, 2.35rem); font-weight: 600;
-      letter-spacing: -.03em; text-decoration: none; border-bottom: 2px solid var(--accent);
-      overflow-wrap: anywhere;
+      display: inline-block; font-size: clamp(1.3rem, 3.4vw, 2.2rem); font-weight: 700;
+      letter-spacing: -.03em; text-decoration: none;
+      border-bottom: 1px solid var(--accent); overflow-wrap: anywhere;
     }
     .contact-mail:hover { color: var(--accent); }
-    .contact-links { margin-top: 1.9rem; display: flex; gap: 1.75rem; flex-wrap: wrap; }
+    .contact-links { margin-top: 1.8rem; display: flex; gap: 1.75rem; flex-wrap: wrap; }
 
     .foot { border-top: 1px solid var(--rule-firm); padding: 1.7rem 0 2.4rem; }
     .foot-in {
       display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap;
-      font-family: var(--mono); font-size: .625rem; text-transform: uppercase;
-      letter-spacing: .12em; color: var(--ink-2);
+      font-size: .75rem; color: var(--ink-2);
     }
 
     /* ── whatsapp gate ───────────────────────────────────── */
@@ -420,10 +391,10 @@ week's dominant mood archetype using XGBoost + SHAP.`,
     }
     .wa-modal.open { display: flex; }
     .wa-box { background: var(--card); border: 1px solid var(--rule-firm); max-width: 380px; width: 100%; padding: 1.6rem; }
-    .wa-box h3 { font-family: var(--mono); font-size: .6875rem; font-weight: 500; text-transform: uppercase; letter-spacing: .13em; }
-    .wa-box p { font-size: .8125rem; color: var(--ink-2); margin: .55rem 0 1.1rem; }
+    .wa-box h3 { font-size: .9375rem; font-weight: 600; }
+    .wa-box p { font-size: .8125rem; color: var(--ink-2); margin: .5rem 0 1.1rem; }
     .wa-box input {
-      width: 100%; font-family: var(--mono); font-size: .875rem; padding: .6rem .7rem;
+      width: 100%; font-family: inherit; font-size: .875rem; padding: .6rem .7rem;
       border: 1px solid var(--rule-firm); background: var(--paper); color: var(--ink);
     }
     .wa-box input:focus { outline: 2px solid var(--accent); outline-offset: -2px; }
@@ -435,8 +406,8 @@ week's dominant mood archetype using XGBoost + SHAP.`,
       .row { grid-template-columns: 1fr; }
       .masthead-main, .band-label, .band-body { grid-column: 1 / -1; }
       .masthead-aside { display: none; }
-      .band-label { position: static; margin-bottom: 1.75rem; display: flex; align-items: baseline; gap: .9rem; }
-      .band-title { margin-top: 0; }
+      .band-label { position: static; margin-bottom: 1.5rem; }
+      .band-body { border-left: 0; padding-left: 0; }
       .work-hl { grid-template-columns: 1fr; }
       .music { grid-template-columns: 1fr; gap: 2rem; }
     }
@@ -451,10 +422,8 @@ week's dominant mood archetype using XGBoost + SHAP.`,
       .band { padding: 3.25rem 0; }
       .def, .deflist--tight .def { grid-template-columns: 1fr; gap: .3rem; }
       .topbar-nav { gap: 1rem; }
-      .topbar-nav a { font-size: .625rem; letter-spacing: .08em; }
-      .work { grid-template-columns: 1fr; }
-      .work-idx { padding-top: 0; margin-bottom: .4rem; }
-      .work-head { flex-direction: column; align-items: flex-start; gap: .3rem; }
+      .topbar-nav a { font-size: .75rem; }
+      .work-head { flex-direction: column; align-items: flex-start; gap: .4rem; }
     }
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
@@ -471,7 +440,7 @@ week's dominant mood archetype using XGBoost + SHAP.`,
     </div>
     <nav class="topbar-nav">
       <a href="#about">About</a>
-      <a href="#skills">Skills</a>
+      <a href="#skills">Stack</a>
       <a href="#work">Work</a>
       <a href="#music">Music</a>
       <a href="#contact">Contact</a>
@@ -481,11 +450,9 @@ week's dominant mood archetype using XGBoost + SHAP.`,
 
 <main>
 
-  <!-- ── MASTHEAD ── -->
   <section class="masthead">
     <div class="grid row">
       <div class="masthead-main">
-        <p class="eyebrow">Available for work</p>
         <h1 id="hero-name"></h1>
         <p class="lede" id="hero-tagline"></p>
         <p class="masthead-role" id="hero-role"></p>
@@ -501,13 +468,9 @@ week's dominant mood archetype using XGBoost + SHAP.`,
     </div>
   </section>
 
-  <!-- ── ABOUT ── -->
   <section class="band" id="about">
     <div class="grid row">
-      <div class="band-label">
-        <div class="band-idx">01</div>
-        <div class="band-title">About</div>
-      </div>
+      <div class="band-label"><div class="band-title">About</div></div>
       <div class="band-body">
         <p class="prose" id="about-text"></p>
         <div class="deflist" id="about-facts" style="margin-top:2.5rem;"></div>
@@ -515,37 +478,25 @@ week's dominant mood archetype using XGBoost + SHAP.`,
     </div>
   </section>
 
-  <!-- ── SKILLS ── -->
   <section class="band" id="skills">
     <div class="grid row">
-      <div class="band-label">
-        <div class="band-idx">02</div>
-        <div class="band-title">Stack</div>
-      </div>
+      <div class="band-label"><div class="band-title">Stack</div></div>
       <div class="band-body">
         <div class="deflist" id="skills-list"></div>
       </div>
     </div>
   </section>
 
-  <!-- ── WORK ── -->
   <section class="band" id="work">
     <div class="grid row">
-      <div class="band-label">
-        <div class="band-idx">03</div>
-        <div class="band-title">Selected Work</div>
-      </div>
+      <div class="band-label"><div class="band-title">Selected work</div></div>
       <div class="band-body" id="work-list"></div>
     </div>
   </section>
 
-  <!-- ── MUSIC ── -->
   <section class="band" id="music">
     <div class="grid row">
-      <div class="band-label">
-        <div class="band-idx">04</div>
-        <div class="band-title" id="music-title"></div>
-      </div>
+      <div class="band-label"><div class="band-title" id="music-title"></div></div>
       <div class="band-body">
         <div class="music">
           <div>
@@ -555,15 +506,15 @@ week's dominant mood archetype using XGBoost + SHAP.`,
                       allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe>
             </div>
             <p class="tube-note">
-              Some covers are blocked from playing outside YouTube by their publishers —
-              <a id="tube-note-link" href="#" target="_blank" rel="noopener">hear those on the channel</a>.
+              A few of these covers will only play on YouTube itself.
+              <a id="tube-note-link" href="#" target="_blank" rel="noopener">The rest of the channel is here</a>.
             </p>
           </div>
           <div>
             <p class="music-blurb" id="music-blurb"></p>
             <div class="deflist deflist--tight" id="music-meta"></div>
             <p class="music-links">
-              <a class="link" id="yt-btn" href="#" target="_blank" rel="noopener">Open the channel<span class="arw">→</span></a>
+              <a class="link" id="yt-btn" href="#" target="_blank" rel="noopener">Open the channel</a>
             </p>
           </div>
         </div>
@@ -571,18 +522,14 @@ week's dominant mood archetype using XGBoost + SHAP.`,
     </div>
   </section>
 
-  <!-- ── CONTACT ── -->
   <section class="band" id="contact">
     <div class="grid row">
-      <div class="band-label">
-        <div class="band-idx">05</div>
-        <div class="band-title">Contact</div>
-      </div>
+      <div class="band-label"><div class="band-title">Contact</div></div>
       <div class="band-body">
         <a class="contact-mail" id="contact-mail" href="#"></a>
         <div class="contact-links">
-          <a class="link" id="c-github" href="#" target="_blank" rel="noopener">GitHub<span class="arw">→</span></a>
-          <a class="link" id="c-linkedin" href="#" target="_blank" rel="noopener">LinkedIn<span class="arw">→</span></a>
+          <a class="link" id="c-github" href="#" target="_blank" rel="noopener">GitHub</a>
+          <a class="link" id="c-linkedin" href="#" target="_blank" rel="noopener">LinkedIn</a>
         </div>
       </div>
     </div>
@@ -593,7 +540,7 @@ week's dominant mood archetype using XGBoost + SHAP.`,
 <footer class="foot">
   <div class="grid foot-in">
     <span id="foot-name"></span>
-    <span>Guatemala — <span id="foot-year"></span></span>
+    <span>Guatemala, <span id="foot-year"></span></span>
     <span>Built &amp; deployed via GitHub Actions</span>
   </div>
 </footer>
@@ -605,7 +552,7 @@ week's dominant mood archetype using XGBoost + SHAP.`,
     <input id="wa-input" type="password" placeholder="Password" autocomplete="off" />
     <div class="wa-err" id="wa-err"></div>
     <div class="wa-actions">
-      <button type="button" class="link" id="wa-submit">Unlock<span class="arw">→</span></button>
+      <button type="button" class="link" id="wa-submit">Unlock</button>
       <button type="button" class="link" id="wa-cancel">Cancel</button>
     </div>
   </div>
@@ -615,78 +562,66 @@ week's dominant mood archetype using XGBoost + SHAP.`,
   /* ── Render everything from the PROFILE config ── */
   const $ = id => document.getElementById(id);
 
-  /* one definition row: small mono key on the left, content on the right */
-  const def = (k, v) => `<div class="def"><div class="k">${k}</div><div class="def-v">${v}</div></div>`;
-  /* middot-separated run of values -- replaces the old tag pills.
-     Joined with real spaces so long lists can wrap. */
-  const seq = arr => `<span class="seq">${arr.join(" <em>·</em> ")}</span>`;
-  const ext = (href, text) =>
-    `<a class="link" href="${href}" target="_blank" rel="noopener">${text}<span class="arw">→</span></a>`;
+  /* one row: small label on the left, content on the right */
+  const def  = (k, v) => `<div class="def"><div class="k">${k}</div><div class="def-v">${v}</div></div>`;
+  /* plain comma list. Commas wrap on their own and read like writing. */
+  const list = arr => arr.join(", ");
+  const ext  = (href, text) => `<a class="link" href="${href}" target="_blank" rel="noopener">${text}</a>`;
 
   /* "End-to-End Data Specialist with experience across..." -> the job title alone */
   const shortRole = PROFILE.title.split(/\s+with\s+/i)[0].replace(/[.,]\s*$/, "");
   const initials  = PROFILE.name.split(/\s+/).filter(Boolean).map(w => w[0]).slice(0,2).join("").toUpperCase();
 
-  // Top bar + masthead
-  $("nav-name").textContent    = PROFILE.name;
-  $("nav-role").textContent    = shortRole;
-  $("hero-name").textContent   = PROFILE.name;
+  $("nav-name").textContent     = PROFILE.name;
+  $("nav-role").textContent     = shortRole;
+  $("hero-name").textContent    = PROFILE.name;
   $("hero-tagline").textContent = PROFILE.tagline;
-  $("hero-role").textContent   = PROFILE.title;
-  $("portrait-ph").textContent = initials;
-  document.title = PROFILE.name + " — Portfolio";
+  $("hero-role").textContent    = PROFILE.title;
+  $("portrait-ph").textContent  = initials;
+  document.title = PROFILE.name + ", " + shortRole;
 
-  // Spec bar
   $("specbar").innerHTML = `
     <div><div class="k">Based in</div><div class="v">${PROFILE.location}</div></div>
-    <div><div class="k">Focus</div><div class="v">Data · ML · Analytics</div></div>
+    <div><div class="k">Status</div><div class="v"><span class="open-dot">&bull;</span> Available for work</div></div>
     <div><div class="k">Email</div><div class="v"><a href="mailto:${PROFILE.email}">${PROFILE.email}</a></div></div>
     <div><div class="k">Elsewhere</div><div class="v">
-      <a href="${PROFILE.github}" target="_blank" rel="noopener">GitHub</a> ·
+      <a href="${PROFILE.github}" target="_blank" rel="noopener">GitHub</a>,
       <a href="${PROFILE.linkedin}" target="_blank" rel="noopener">LinkedIn</a>
     </div></div>`;
 
-  // About
   $("about-text").textContent = PROFILE.about;
   $("about-facts").innerHTML =
     def("Languages", PROFILE.languages
-          .map(l => `${l.name} <span class="muted">(${l.level})</span>`).join(' <em class="sep-dot">·</em> ')) +
-    def("Off the clock", seq(PROFILE.hobbies.map(h => h.label)));
+          .map(l => `${l.name} <span class="muted">(${l.level})</span>`).join(", ")) +
+    def("Off the clock", list(PROFILE.hobbies.map(h => h.label)));
 
-  // Skills — one ruled row per group
   $("skills-list").innerHTML = Object.entries(PROFILE.skills)
-    .map(([group, tags]) => def(group, seq(tags))).join("");
+    .map(([group, tags]) => def(group, list(tags))).join("");
 
-  // Work
-  $("work-list").innerHTML = PROFILE.projects.map((p, i) => {
+  $("work-list").innerHTML = PROFILE.projects.map(p => {
     const isLive = p.badge === "Live" || p.badge === "In Production";
     const live   = p.link && p.link !== "#";
     const links  = [];
     links.push(live ? ext(p.link, p.label) : `<span class="link is-off">${p.label}</span>`);
     if (p.waEnc) links.push(
       `<button type="button" class="link wa-locked" data-salt="${p.waEnc.salt}" data-iv="${p.waEnc.iv}"
-        data-ct="${p.waEnc.ct}">Chat on WhatsApp<span class="arw">→</span></button>`);
+        data-ct="${p.waEnc.ct}">Chat on WhatsApp</button>`);
     if (p.repo)     links.push(ext(p.repo, "View Repository"));
     if (p.archLink) links.push(ext(p.archLink, "Architecture"));
 
     return `
       <article class="work">
-        <div class="work-idx">${String(i+1).padStart(2,"0")}</div>
-        <div>
-          <div class="work-head">
-            <h3 class="work-name">${p.name}</h3>
-            <span class="work-status${isLive ? " is-live" : ""}">${p.badge}</span>
-          </div>
-          <p class="work-desc">${p.description}</p>
-          <ul class="work-hl">${p.highlights
-            .map(h => `<li><span>—</span><span>${h}</span></li>`).join("")}</ul>
-          <p class="work-stack">${seq(p.tags)}</p>
-          <p class="work-links">${links.join("")}</p>
+        <div class="work-head">
+          <h3 class="work-name">${p.name}</h3>
+          <span class="work-status${isLive ? " is-live" : ""}">${p.badge}</span>
         </div>
+        <p class="work-desc">${p.description}</p>
+        <ul class="work-hl">${p.highlights.map(h => `<li>${h}</li>`).join("")}</ul>
+        <p class="work-stack">${list(p.tags)}</p>
+        <p class="work-links">${links.join("")}</p>
       </article>`;
   }).join("");
 
-  // Music
   const yt = PROFILE.youtube;
   const ytChannelUrl = "https://www.youtube.com/channel/" + yt.channelId;
   $("music-title").textContent = yt.heading;
@@ -694,7 +629,7 @@ week's dominant mood archetype using XGBoost + SHAP.`,
   $("music-meta").innerHTML =
     def("Channel", ext(ytChannelUrl, "@" + yt.handle)) +
     def("Playing", yt.featuredTitle || "Solo piano") +
-    def("Repertoire", seq(yt.tags));
+    def("Plays", list(yt.tags));
   $("tube-note-link").href = ytChannelUrl;
   $("yt-btn").href = ytChannelUrl;
 
@@ -709,7 +644,6 @@ week's dominant mood archetype using XGBoost + SHAP.`,
   tube.src   = "https://www.youtube-nocookie.com/embed/" + vid + "?" + qs.join("&");
   tube.title = yt.handle + " on YouTube";
 
-  // Contact + footer
   const cm = $("contact-mail");
   cm.textContent = PROFILE.email;
   cm.href = "mailto:" + PROFILE.email;
