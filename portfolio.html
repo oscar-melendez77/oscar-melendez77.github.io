@@ -28,13 +28,13 @@
 
     skills: {
   "Core": [
-    "Python", "SQL", "Scala", "dbt", "FastAPI", "Git/GitHub"
+    "Python", "SQL", "dbt", "FastAPI", "Git/GitHub"
   ],
   "Cloud & Warehousing": [
-    "GCP", "BigQuery", "Supabase/Postgres", "Iceberg", "GCS"
+    "GCP", "BigQuery", "Supabase/Postgres"
   ],
   "Pipelines & Orchestration": [
-    "ETL/ELT", "Batch & Streaming", "Prefect", "Airflow", "Kafka", "Pipeline Monitoring"
+    "ETL/ELT", "Batch & Streaming", "Prefect"
   ],
   "ML & AI": [
     "Scikit-learn", "XGBoost", "LightGBM", "SHAP", "MLflow", "KMeans", "Transformers (DistilRoBERTa)", "LangChain", "Claude/Haiku", "Groq Llama 3", "ChromaDB", "Google Vision OCR"
@@ -161,10 +161,10 @@ week's dominant mood archetype using XGBoost + SHAP.`,
       {
         name:        "PharmaWatch",
         badge:       "Live",
-        description: `A drug risk intelligence platform that joins adverse-event reports, medical research, drug labels, and patient sentiment from 4 public sources into one per-drug profile. Processes FDA FAERS with Scala + Spark on an Iceberg lakehouse, scores four risk outcomes with LightGBM + SHAP, personalizes them to your age/sex/habits, and answers follow-ups with a RAG agent (LangChain + Groq Llama 3) grounded in all four sources.`,
+        description: `A drug risk intelligence platform that joins adverse-event reports, medical research, drug labels, and patient sentiment from 4 public sources into one per-drug profile. Processes FDA FAERS, scores four risk outcomes with LightGBM + SHAP, personalizes them to your age/sex/habits, and answers follow-ups with a RAG agent (LangChain + Groq Llama 3) grounded in all four sources.`,
         highlights: [
           "4 sources: FDA FAERS, PubMed, OpenFDA labels, Reddit",
-          "Scala + Spark on Databricks → Iceberg → Snowflake / BigQuery (config-flag migration)",
+          "Ingests and joins the 4 sources into one per-drug profile in BigQuery",
           "4 LightGBM models + SHAP + rule-based personalization, tracked via MLflow",
           "RAG agent over all sources: ChromaDB + LangChain + Groq Llama 3",
         ],
@@ -172,7 +172,7 @@ week's dominant mood archetype using XGBoost + SHAP.`,
         label:    "View Dashboard",
         repo:     "https://github.com/oscar-melendez77/PharmaWatch",
         archLink: "pharmawatch-architecture.html",
-        tags:  ["Python", "Scala", "Spark", "Iceberg", "Snowflake", "BigQuery", "dbt", "Airflow", "Kafka", "LightGBM", "MLflow", "LangChain", "Groq", "FastAPI"],
+        tags:  ["Python", "BigQuery", "dbt", "LightGBM", "SHAP", "MLflow", "ChromaDB", "LangChain", "Groq", "FastAPI"],
       },
       {
         name:        "Más Watts",
