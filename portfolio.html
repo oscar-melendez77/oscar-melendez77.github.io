@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Oscar Melendez — Data Engineer & Data Scientist</title>
+  <title>Oscar J. Melendez — Data Analyst</title>
+  <meta name="description" content="Data analyst with 6 years in telecom, fintech and banking: SQL and Python analysis, Tableau / Power BI dashboards, and automated reporting across 15+ markets." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -17,39 +18,191 @@
   const PROFILE = {
 
     name:       "Oscar J. Melendez",
-    title:      "End-to-End Data Specialist with experience across data engineering, analytics, business intelligence, and machine learning.",
-    tagline:    "Designing cloud-native pipelines that transform raw signals into production intelligence.",
-    location:   "Guatemala",
-    email:      "oscarj.melendezo@gmail.com",        // ← replace
-    linkedin:   "https://linkedin.com/in/josueme91",  // ← replace
+
+    /* role  = the short job title. It appears in the top bar and the
+              browser tab. Keep it to the title a recruiter searches for. */
+    role:       "Data Analyst",
+
+    /* title = the one-line positioning sentence under your name. */
+    title:      "Data analyst and BI specialist — six years turning raw data into pricing, retention and operational decisions for telecom, fintech and banking.",
+
+    tagline:    "Six years of analysis, dashboards and automation across 15+ markets.",
+
+    location:   "Guatemala City (CST)",
+    email:      "oscarj.melendezo@gmail.com",
+    phone:      "+502 5031 8809",
+    linkedin:   "https://linkedin.com/in/josueme91",
     github:     "https://github.com/oscar-melendez77",
 
-    about: `I’m an End-to-End Data Specialist passionate about turning complex data into clear insight and intelligent products. My work spans data engineering, analytics, business intelligence, and applied machine learning, with a focus on building end-to-end systems that transform real-world signals into decisions, discovery, and measurable impact. I’m especially drawn to projects where data, technology, and music intersect, combining technical depth with curiosity, creativity, and a product mindset.`,
+    /* ── Résumé download ──────────────────────────────────────
+       Leave "" and no button appears. To turn it on: copy your
+       PDF into this folder, then put the file name here, e.g.
+         resume: "oscar-melendez-data-analyst.pdf",
+       Remember the PDF becomes public — check what is on it
+       (phone number, address) before you commit it.
+    ──────────────────────────────────────────────────────── */
+    resume:     "",
 
+    about: `I'm an industrial engineer who moved into analytics and stayed. Six years across banking,
+telecom and fintech, doing the work analysts actually get measured on: exploratory analysis, KPI
+definition, cohort and churn work, price elasticity, and dashboards leadership opens on a Monday
+morning. I'm strong in SQL and Python, and I automate the reporting rather than rebuild it by hand —
+at Liberty Networks that cut manual reporting effort by about 40%. I'm comfortable owning the whole
+path from question to answer, including sourcing and modeling the data myself when the analytics
+layer doesn't exist yet. The side projects below are the same instinct off the clock: pick a messy
+public dataset, build the pipeline, and ship the dashboard.`,
+
+    /* ── The spec strip under your name ───────────────────────
+       Shown 4-across on desktop. Add or remove rows freely.
+    ──────────────────────────────────────────────────────── */
+    facts: [
+      { k: "Experience",  v: "6 years in analytics & BI" },
+      { k: "Focus",       v: "Analysis, dashboards, automation" },
+      { k: "Industries",  v: "Telecom, fintech, banking" },
+      { k: "Reach",       v: "15+ markets, LATAM & Caribbean" },
+    ],
+
+    /* ── Headline numbers at the top of Experience ─────────── */
+    metrics: [
+      { n: "6 yrs",  l: "Analytics, BI and data engineering, 2020–2026" },
+      { n: "15+",    l: "Markets reported on across LATAM & the Caribbean" },
+      { n: "~40%",   l: "Manual reporting effort removed at Liberty Networks" },
+      { n: "10+",    l: "Reporting tables kept current by automated pipelines" },
+    ],
+
+    /* ── Work history ─────────────────────────────────────────
+       Newest first. `when` is the date range, `mode` is the
+       remote/hybrid/on-site note, `tools` is the stack line.
+    ──────────────────────────────────────────────────────── */
+    experience: [
+      {
+        title: "Business Intelligence Specialist",
+        org:   "Liberty Networks",
+        when:  "Sep 2025 — Jun 2026",
+        mode:  "Remote",
+        points: [
+          `Led end-to-end analytics and reporting on hurricane impact across several Caribbean markets,
+           integrating heterogeneous sources — local file systems, Redshift, the enterprise warehouse
+           and geospatial APIs — into one view of severity and recovery progress.`,
+          `Automated daily delivery of executive-ready dashboards, reports and presentations, so
+           leadership had same-day visibility instead of waiting on a manual cycle.`,
+          `Built Prefect ingestion pipelines that kept 10+ reporting tables current without hand-holding.`,
+          `Cut manual reporting effort by roughly 40% through Python/SQL automation and query tuning.`,
+        ],
+        tools: ["SQL", "Python", "Prefect", "AWS Redshift", "Geospatial APIs", "Executive dashboards"],
+      },
+      {
+        title: "Sr Pricing Data Analyst",
+        org:   "Liberty Networks",
+        when:  "Jun 2024 — Aug 2025",
+        mode:  "Hybrid — Guatemala",
+        points: [
+          `Applied advanced analytics to estimate price elasticity and segment customers, producing the
+           insight behind pricing and revenue-optimization decisions.`,
+          `Built a multi-market ML price-sensitivity model for prepaid services, combining usage,
+           revenue, top-up behavior and demographic/geospatial data.`,
+          `Translated customer-behavior analysis into recommendations commercial teams acted on.`,
+        ],
+        tools: ["SQL", "Python", "Price elasticity", "Segmentation", "Predictive modeling"],
+      },
+      {
+        title: "Sr Financial Data Engineer",
+        org:   "Disagro",
+        when:  "Apr 2024 — Jun 2024",
+        mode:  "On-site — Guatemala",
+        points: [
+          `Improved reliability across analytics workflows by implementing structured ETL pipelines and
+           validation processes.`,
+          `Reduced data inconsistencies by introducing validation checks across the datasets feeding
+           reporting.`,
+          `Delivered insights on key business trends through statistical analysis supporting operational
+           decisions.`,
+        ],
+        tools: ["SQL", "Python", "ETL/ELT", "Data validation", "Statistical analysis"],
+      },
+      {
+        title: "Sr Data Intelligence Specialist",
+        org:   "Grupo Salinas",
+        when:  "Jan 2023 — Aug 2023",
+        mode:  "On-site — Guatemala",
+        points: [
+          `Designed and implemented the end-to-end data platform for the Digital Banking division
+           (Banco Azteca mobile app), building the analytics foundation from the ground up.`,
+          `Led pipeline orchestration to ingest high-volume transactional data from multiple sources,
+           including telecom APIs and Firebase.`,
+          `Architected and deployed a star-schema dimensional model optimized for analytics and BI,
+           which is what made self-serve reporting possible for the team.`,
+        ],
+        tools: ["SQL", "Python", "Star-schema modeling", "REST/JSON APIs", "Firebase", "BI enablement"],
+      },
+      {
+        title: "Product Owner — Data",
+        org:   "Agromercantil Bank (Bancolombia)",
+        when:  "Jul 2021 — Sep 2022",
+        mode:  "Remote",
+        points: [
+          `Improved collections-strategy effectiveness by leading the development and deployment of
+           predictive machine-learning models.`,
+          `Delivered end-to-end data products by coordinating cross-functional teams across data,
+           engineering and business.`,
+          `Got the models actually used — integrating predictions into collections workflows and
+           decision processes rather than leaving them in a notebook.`,
+        ],
+        tools: ["SQL", "Python", "Predictive modeling", "Stakeholder management", "Data products"],
+      },
+      {
+        title: "Data Analyst III",
+        org:   "Agromercantil Bank (Bancolombia)",
+        when:  "Jun 2020 — Jul 2021",
+        mode:  "Remote",
+        points: [
+          `Improved collections performance by developing predictive models for customer behavior and
+           repayment likelihood.`,
+          `Enabled leadership decision-making by building management dashboards and performance reports.`,
+          `Identified optimization opportunities in collections strategy through data mining and trend
+           analysis.`,
+        ],
+        tools: ["SQL", "Python", "Dashboards", "Data mining", "Trend analysis"],
+      },
+    ],
+
+    education: [
+      { what: "B.S. Industrial Engineering", where: "Universidad del Valle de Guatemala", when: "2010 — 2015" },
+    ],
+
+    certifications: [
+      { what: "Microsoft Certified: Fabric Data Engineer Associate (DP-700)", when: "Aug 2026" },
+    ],
+
+    /* ── Skills ───────────────────────────────────────────────
+       Ordered the way a hiring manager reads: analysis first,
+       then SQL, then the dashboards, then everything else.
+    ──────────────────────────────────────────────────────── */
     skills: {
-  "Core": [
-    "Python", "SQL", "dbt", "FastAPI", "Git/GitHub"
+  "Analysis": [
+    "Exploratory data analysis", "Cohort analysis", "Churn & retention modeling", "Customer segmentation",
+    "Price elasticity", "KPI definition & metric governance", "Funnel & revenue analysis",
+    "A/B test readout", "Trend & variance analysis"
   ],
-  "Cloud & Warehousing": [
-    "GCP", "BigQuery", "Supabase/Postgres"
+  "SQL & Modeling": [
+    "Advanced SQL (window functions, CTEs, query tuning)", "Star / snowflake schemas", "dbt", "Data modeling"
   ],
-  "Pipelines & Orchestration": [
-    "ETL/ELT", "Batch & Streaming", "Prefect"
+  "Dashboards & BI": [
+    "Tableau", "Power BI", "Looker Studio", "Executive dashboard design", "Self-serve reporting",
+    "Stakeholder presentations"
   ],
-  "ML & AI": [
-    "Scikit-learn", "XGBoost", "LightGBM", "SHAP", "MLflow", "KMeans", "Transformers (DistilRoBERTa)", "LangChain", "Claude/Haiku", "Groq Llama 3", "ChromaDB", "Google Vision OCR"
+  "Automation": [
+    "Python (pandas, NumPy, Polars)", "Prefect", "ETL/ELT", "Scheduled reporting",
+    "REST/JSON API ingestion", "Data validation & anomaly detection"
   ],
-  "Analytics & Specialized Data": [
-    "Pandas", "Polars", "Librosa", "Sentiment Analysis", "Emotion Classification", "Text Embeddings", "Audio Feature Extraction"
+  "Data Platforms": [
+    "Google BigQuery", "AWS Redshift", "AWS Athena", "PySpark", "Microsoft Fabric", "Supabase/Postgres"
   ],
-  "APIs & Integrations": [
-    "WhatsApp Cloud API (Meta)", "Spotify", "Billboard", "Guardian", "Reddit", "PubMed", "OpenFDA/FAERS", "iTunes"
+  "Statistics & ML": [
+    "R", "Scikit-learn", "XGBoost", "LightGBM", "SHAP", "MLflow", "KMeans", "Sentiment & emotion classification"
   ],
-  "Apps & Frontend": [
-    "Next.js", "React Native (Expo)", "SQLite"
-  ],
-  "Deployment": [
-    "Render", "Netlify", "GitHub Pages", "automated deploys on push"
+  "Also builds": [
+    "FastAPI", "Next.js", "React Native (Expo)", "Git/GitHub", "LangChain", "Claude", "GCP", "Render / Netlify"
   ]
 },
 
@@ -57,8 +210,8 @@
        level options: "Native", "Fluent", "Professional", "Conversational"
     ──────────────────────────────────────────────────────── */
     languages: [
-      { name: "English", level: "Fluent"  },
-      { name: "Spanish", level: "Native"  },
+      { name: "Spanish", level: "Native"       },
+      { name: "English", level: "Professional" },
     ],
 
     /* ── Hobbies ────────────────────────────────────────── */
@@ -66,7 +219,7 @@
       { icon: "🎹", label: "Piano & Music Production" },
       { icon: "🏋️", label: "Strength & Performance Training" },
       { icon: "🤖", label: "AI Research & Emerging Tech" },
-      { icon: "🎮", label: "Competitive Gaming" },
+      { icon: "🎬", label: "Film & Narrative Structure" },
     ],
 
     /* ── YouTube channel ───────────────────────────────
@@ -122,62 +275,75 @@ arrangements, recorded at home in one take.`,
       tags:            ["jazz standards", "film themes", "pop arrangements"],
     },
 
+    /* ── Side projects ────────────────────────────────────────
+       Dashboard-first: the two with a live dashboard lead, because
+       that is what an analytics reader wants to click.
+    ──────────────────────────────────────────────────────── */
     projects: [
       {
-        name:        "CHAN-C",
-        badge:       "In Production",
-        description: `A WhatsApp-first, commission-based marketplace that formalizes Guatemala's informal construction labor market — connecting vetted plumbers, electricians, carpenters, and masons with companies and homeowners. Runs on THREE dedicated WhatsApp lines: A (onboarding & general), B (job posting, reverse-auction negotiation & the atomic deal lock), and C (post-payment coordination). Escrow-protected payments, reputation vetting, and SAT-compliant electronic invoicing (FEL). Sole technical lead across architecture, backend, the three-line routing engine, WhatsApp Cloud API integration, the operator dashboard, and the mobile app. Co-founder Cecilia L. leads art & design.`,
-        highlights: [
-          "Three-line A/B/C routing (Meta WhatsApp Cloud API) with a stateful, typed deal-flow engine — one source of truth for price, atomic exactly-once deal lock",
-          "Post-payment coordination line (C): capture + AI triage (Haiku), 4-hour digests, human takeover, and grounded hirer Q&A — never a confident wrong answer",
-          "Escrow + tiered commission engine with a four-rung worker reputation ladder; masked anti-poaching relay that reveals contact only after payment",
-          "Deterministic sim/verify harness (SQL⇔in-memory parity) + operator dashboard: worker/hirer verification, comprobante review, and live supervision",
-        ],
-        link:  "https://wa.me/50252433020",
-        label: "Chat on WhatsApp",
-        archLink: "chan-c-architecture.html",
-        tags:  ["Python", "FastAPI", "Next.js", "React Native", "Supabase", "WhatsApp Cloud API", "Haiku", "Claude", "Google Vision OCR", "FEL"],
-      },
-      {
         name:        "SoundPulse — PulseIQ",
-        badge:       "Live",
-        description: `An end-to-end data platform that correlates world news sentiment
-with trending music audio features. Ingests daily data from 8 sources, classifies
-emotions with DistilRoBERTa, clusters audio moods with KMeans, and predicts next
-week's dominant mood archetype using XGBoost + SHAP.`,
+        badge:       "Live Dashboard",
+        description: `An analytics platform that asks whether the mood of the news shows up in the
+music people stream. Ingests 8 daily sources, scores news emotion with DistilRoBERTa, clusters
+audio into mood archetypes, and reports the correlation on a public dashboard — plus a
+forward-looking call on next week's dominant mood.`,
         highlights: [
-          "Daily pipeline: 8 ingestion modules + dbt + ML",
-          "30 Librosa audio features across 13 weeks of Billboard charts",
-          "Pearson correlation: 10 emotion scores × 5 mood archetypes",
-          "XGBoost lag-1 predictor with SHAP feature importance",
+          "Correlation analysis: 10 emotion scores × 5 mood archetypes, reported with Pearson r",
+          "30 audio features engineered across 13 weeks of Billboard charts",
+          "Automated daily pipeline: 8 ingestion modules → dbt models in BigQuery → published dashboard",
+          "XGBoost lag-1 predictor with SHAP, so every call comes with the drivers behind it",
         ],
         link:  "https://oscar-melendez77.github.io/soundpulse-pipeline/",
         label: "View Dashboard",
         // repo: add this line to any project to get a "View Repository" button.
         // Delete the line and the button disappears.
         repo:  "https://github.com/oscar-melendez77/soundpulse-pipeline",
-        tags:  ["Python", "BigQuery", "Prefect", "dbt", "XGBoost", "NLP", "GCP"],
+        tags:  ["SQL", "Python", "BigQuery", "dbt", "Prefect", "XGBoost", "SHAP", "NLP", "GCP"],
       },
       {
         name:        "PharmaWatch",
-        badge:       "Live",
-        description: `A drug risk intelligence platform that joins adverse-event reports, medical research, drug labels, and patient sentiment from 4 public sources into one per-drug profile. Processes FDA FAERS, scores four risk outcomes with LightGBM + SHAP, personalizes them to your age/sex/habits, and answers follow-ups with a RAG agent (LangChain + Groq Llama 3) grounded in all four sources.`,
+        badge:       "Live Dashboard",
+        description: `A drug-risk dashboard that joins adverse-event reports, medical research, drug
+labels and patient sentiment from 4 public sources into a single per-drug profile. Scores four risk
+outcomes, personalizes them to the reader's age, sex and habits, and answers follow-up questions
+from a retrieval layer grounded in the same four sources.`,
         highlights: [
-          "4 sources: FDA FAERS, PubMed, OpenFDA labels, Reddit",
-          "Ingests and joins the 4 sources into one per-drug profile in BigQuery",
-          "4 LightGBM models + SHAP + rule-based personalization, tracked via MLflow",
-          "RAG agent over all sources: ChromaDB + LangChain + Groq Llama 3",
+          "Modeled FDA FAERS, PubMed, OpenFDA labels and Reddit into one per-drug profile in BigQuery",
+          "4 LightGBM risk models with SHAP explanations, experiments tracked in MLflow",
+          "Rule-based personalization layer on top of the model scores",
+          "Grounded Q&A over every source — ChromaDB + LangChain, no invented answers",
         ],
         link:     "https://oscar-melendez77.github.io/PharmaWatch/",
         label:    "View Dashboard",
         repo:     "https://github.com/oscar-melendez77/PharmaWatch",
         archLink: "pharmawatch-architecture.html",
-        tags:  ["Python", "BigQuery", "dbt", "LightGBM", "SHAP", "MLflow", "ChromaDB", "LangChain", "Groq", "FastAPI"],
+        tags:  ["SQL", "Python", "BigQuery", "dbt", "LightGBM", "SHAP", "MLflow", "ChromaDB", "LangChain", "FastAPI"],
+      },
+      {
+        name:        "CHAN-C",
+        badge:       "In Production",
+        description: `A WhatsApp-first, commission-based marketplace formalizing Guatemala's informal
+construction labor market — connecting vetted plumbers, electricians, carpenters and masons with
+companies and homeowners. Sole technical lead across architecture, backend, the routing engine, the
+operator dashboard and the mobile app. Co-founder Cecilia L. leads art & design.`,
+        highlights: [
+          "Operator dashboard for live supervision: worker/hirer verification, payment-receipt review, deal monitoring",
+          "Three-line A/B/C routing on the Meta WhatsApp Cloud API with a typed, stateful deal-flow engine",
+          "Escrow + tiered commission engine driven by a four-rung worker reputation ladder",
+          "Deterministic sim/verify harness with SQL⇔in-memory parity checks on every data path",
+        ],
+        link:  "https://wa.me/50252433020",
+        label: "Chat on WhatsApp",
+        archLink: "chan-c-architecture.html",
+        tags:  ["Python", "SQL", "FastAPI", "Supabase/Postgres", "Next.js", "React Native", "WhatsApp Cloud API", "Claude"],
       },
       {
         name:        "Más Watts",
         badge:       "In Progress",
-        description: `A mobile music-guessing party game in the spirit of Hitster — mechanically redesigned for party play, with a curated Guatemalan & Latin American catalog as its core differentiator. QR-coded physical cards trigger audio playback on a host phone; offline-first, single-device, no backend. Targeting Google Play, Guatemala first with LATAM expansion planned. Solo technical build (co-founder Cecilia L. leads art & design).`,
+        description: `A mobile music-guessing party game in the spirit of Hitster — mechanically
+redesigned for party play, with a curated Guatemalan and Latin American catalog as its core
+differentiator. Offline-first, single-device, no backend. Solo technical build (co-founder
+Cecilia L. leads art & design).`,
         highlights: [
           "QR-card scanning → 1s / 3s / 5s snippet bidding tiers from iTunes previews",
           "Real-time audio modifiers — speed, pitch-shift, low-pass — applied live, never persisted",
@@ -187,7 +353,7 @@ week's dominant mood archetype using XGBoost + SHAP.`,
         link:  "#",
         label: "Private",
         archLink: "mas-watts-architecture.html",
-        tags:  ["React Native", "Expo", "expo-av", "iTunes API", "SQLite", "expo-speech", "QR Scanning", "Songlink/Odesli", "Librosa", "Android"],
+        tags:  ["React Native", "Expo", "SQLite", "iTunes API", "Librosa", "Android"],
       },
     ],
 
@@ -273,7 +439,8 @@ week's dominant mood archetype using XGBoost + SHAP.`,
       font-size: clamp(1.05rem, 1.75vw, 1.35rem); font-weight: 400; line-height: 1.38;
       letter-spacing: -.012em; margin-top: 1.4rem; max-width: 31ch;
     }
-    .masthead-role { font-size: .9375rem; color: var(--ink-2); margin-top: 1.15rem; max-width: 50ch; }
+    .masthead-role { font-size: .9375rem; color: var(--ink-2); margin-top: 1.15rem; max-width: 56ch; }
+    .masthead-cta  { margin-top: 1.6rem; display: flex; flex-wrap: wrap; gap: 1.5rem; }
     .portrait, .portrait-ph {
       width: 100%; aspect-ratio: 1 / 1; object-fit: cover; object-position: center 22%;
       border: 1px solid var(--rule-firm);
@@ -283,13 +450,15 @@ week's dominant mood archetype using XGBoost + SHAP.`,
       background: var(--card); font-size: 1.9rem; font-weight: 700; color: var(--ink-2);
     }
 
+    /* the spec strip. 4 across, wraps to as many rows as there are cells. */
     .specbar {
       margin-top: 4rem;
       border-top: 1px solid var(--rule-firm); border-bottom: 1px solid var(--rule-firm);
       display: grid; grid-template-columns: repeat(4, 1fr);
     }
     .specbar > div { padding: 1rem 1.5rem 1.05rem; border-left: 1px solid var(--rule); }
-    .specbar > div:first-child { padding-left: 0; border-left: 0; }
+    .specbar > div:nth-child(4n+1) { padding-left: 0; border-left: 0; }
+    .specbar > div:nth-child(n+5)  { border-top: 1px solid var(--rule); }
     .specbar .v { font-size: .875rem; margin-top: .4rem; overflow-wrap: anywhere; }
     .specbar a { text-decoration: none; border-bottom: 1px solid var(--rule-mid); }
     .specbar a:hover { color: var(--accent); border-color: var(--accent); }
@@ -325,10 +494,46 @@ week's dominant mood archetype using XGBoost + SHAP.`,
     }
     .link:hover { color: var(--accent); border-color: var(--accent); }
     .link.is-off { color: var(--ink-2); border-bottom-style: dotted; cursor: default; }
+    .link--strong { font-weight: 600; border-bottom: 2px solid var(--accent); }
     button.link {
       background: none; border: 0; border-bottom: 1px solid var(--rule-firm);
       font-family: inherit; font-size: .8125rem; cursor: pointer;
     }
+
+    /* ── headline numbers ────────────────────────────────── */
+    .metrics {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      border-top: 1px solid var(--rule-firm); border-bottom: 1px solid var(--rule-firm);
+      margin-bottom: 2.75rem;
+    }
+    .metrics > div { padding: 1.1rem 1.25rem 1.2rem; border-left: 1px solid var(--rule); }
+    .metrics > div:first-child { padding-left: 0; border-left: 0; }
+    .metric-n {
+      font-size: clamp(1.5rem, 3vw, 2.05rem); font-weight: 700;
+      letter-spacing: -.03em; line-height: 1;
+    }
+    .metric-l { font-size: .75rem; line-height: 1.45; color: var(--ink-2); margin-top: .55rem; }
+
+    /* ── work history ────────────────────────────────────── */
+    .role { padding: 2rem 0; border-top: 1px solid var(--rule-firm); }
+    .role:first-child { border-top: 0; padding-top: 0; }
+    .role-head { display: flex; align-items: baseline; justify-content: space-between; gap: 1.25rem; }
+    .role-title { font-size: 1.125rem; font-weight: 700; letter-spacing: -.02em; line-height: 1.25; }
+    .role-title .at { color: var(--ink-2); font-weight: 400; }
+    .role-when {
+      font-size: .6875rem; font-weight: 600; text-transform: uppercase;
+      letter-spacing: .09em; color: var(--ink-2); white-space: nowrap; text-align: right;
+    }
+    .role-when .mode { display: block; font-weight: 400; letter-spacing: .04em; margin-top: .25rem; }
+    .role-pts { list-style: none; margin-top: 1rem; }
+    .role-pts li {
+      font-size: .875rem; line-height: 1.55; color: var(--ink-2);
+      position: relative; padding-left: 1.15rem; margin-top: .5rem;
+    }
+    .role-pts li::before {
+      content: "—"; position: absolute; left: 0; color: var(--rule-firm);
+    }
+    .role-tools { font-size: .75rem; color: var(--ink-2); margin-top: 1.05rem; line-height: 1.7; }
 
     /* ── work ────────────────────────────────────────────── */
     .work { padding: 2.25rem 0; border-top: 1px solid var(--rule-firm); }
@@ -349,6 +554,7 @@ week's dominant mood archetype using XGBoost + SHAP.`,
     }
     .work-stack { font-size: .75rem; color: var(--ink-2); margin-top: 1.2rem; line-height: 1.7; }
     .work-links { margin-top: 1.3rem; display: flex; flex-wrap: wrap; gap: 1.5rem; }
+    .work-intro { font-size: .875rem; color: var(--ink-2); max-width: 62ch; margin-bottom: 2.25rem; }
 
     /* ── music ───────────────────────────────────────────── */
     .music { display: grid; grid-template-columns: minmax(0,1.55fr) minmax(0,1fr); gap: 2.5rem; }
@@ -367,6 +573,7 @@ week's dominant mood archetype using XGBoost + SHAP.`,
       border-bottom: 1px solid var(--accent); overflow-wrap: anywhere;
     }
     .contact-mail:hover { color: var(--accent); }
+    .contact-sub { font-size: .9375rem; color: var(--ink-2); margin-top: 1rem; }
     .contact-links { margin-top: 1.8rem; display: flex; gap: 1.75rem; flex-wrap: wrap; }
 
     .foot { border-top: 1px solid var(--rule-firm); padding: 1.7rem 0 2.4rem; }
@@ -404,10 +611,11 @@ week's dominant mood archetype using XGBoost + SHAP.`,
       .music { grid-template-columns: 1fr; gap: 2rem; }
     }
     @media (max-width: 760px) {
-      .specbar { grid-template-columns: 1fr 1fr; }
-      .specbar > div { border-left: 1px solid var(--rule); }
-      .specbar > div:nth-child(odd) { padding-left: 0; border-left: 0; }
-      .specbar > div:nth-child(n+3) { border-top: 1px solid var(--rule); }
+      .specbar, .metrics { grid-template-columns: 1fr 1fr; }
+      .specbar > div, .metrics > div { border-left: 1px solid var(--rule); }
+      .specbar > div:nth-child(4n+1) { padding-left: 1.5rem; border-left: 1px solid var(--rule); }
+      .specbar > div:nth-child(odd), .metrics > div:nth-child(odd) { padding-left: 0; border-left: 0; }
+      .specbar > div:nth-child(n+3), .metrics > div:nth-child(n+3) { border-top: 1px solid var(--rule); }
     }
     @media (max-width: 620px) {
       .masthead { padding-top: 3.5rem; }
@@ -415,11 +623,20 @@ week's dominant mood archetype using XGBoost + SHAP.`,
       .def, .deflist--tight .def { grid-template-columns: 1fr; gap: .3rem; }
       .topbar-nav { gap: 1rem; }
       .topbar-nav a { font-size: .75rem; }
-      .work-head { flex-direction: column; align-items: flex-start; gap: .4rem; }
+      .work-head, .role-head { flex-direction: column; align-items: flex-start; gap: .4rem; }
+      .role-when { text-align: left; }
+      .role-when .mode { display: inline; margin-top: 0; }
+      .role-when .mode::before { content: " · "; }
     }
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
       * { transition: none !important; }
+    }
+    @media print {
+      .topbar, .music, .wa-modal, .masthead-aside { display: none !important; }
+      body { background: #fff; }
+      .band { padding: 1.5rem 0; break-inside: avoid; }
+      .role, .work { break-inside: avoid; }
     }
   </style>
 </head>
@@ -432,8 +649,9 @@ week's dominant mood archetype using XGBoost + SHAP.`,
     </div>
     <nav class="topbar-nav">
       <a href="#about">About</a>
-      <a href="#skills">Stack</a>
-      <a href="#work">Work</a>
+      <a href="#experience">Experience</a>
+      <a href="#skills">Skills</a>
+      <a href="#work">Projects</a>
       <a href="#music">Music</a>
       <a href="#contact">Contact</a>
     </nav>
@@ -448,6 +666,7 @@ week's dominant mood archetype using XGBoost + SHAP.`,
         <h1 id="hero-name"></h1>
         <p class="lede" id="hero-tagline"></p>
         <p class="masthead-role" id="hero-role"></p>
+        <p class="masthead-cta" id="hero-cta"></p>
       </div>
       <div class="masthead-aside">
         <img class="portrait" src="photo.jpg" alt="Oscar Melendez"
@@ -470,9 +689,19 @@ week's dominant mood archetype using XGBoost + SHAP.`,
     </div>
   </section>
 
+  <section class="band" id="experience">
+    <div class="grid row">
+      <div class="band-label"><div class="band-title">Experience</div></div>
+      <div class="band-body">
+        <div class="metrics" id="metrics"></div>
+        <div id="experience-list"></div>
+      </div>
+    </div>
+  </section>
+
   <section class="band" id="skills">
     <div class="grid row">
-      <div class="band-label"><div class="band-title">Stack</div></div>
+      <div class="band-label"><div class="band-title">Skills</div></div>
       <div class="band-body">
         <div class="deflist" id="skills-list"></div>
       </div>
@@ -481,8 +710,14 @@ week's dominant mood archetype using XGBoost + SHAP.`,
 
   <section class="band" id="work">
     <div class="grid row">
-      <div class="band-label"><div class="band-title">Selected work</div></div>
-      <div class="band-body" id="work-list"></div>
+      <div class="band-label"><div class="band-title">Selected projects</div></div>
+      <div class="band-body">
+        <p class="work-intro">
+          Built outside of work, on my own time, to keep the analysis muscles honest: each one takes a
+          messy public dataset all the way from ingestion to a dashboard someone can actually read.
+        </p>
+        <div id="work-list"></div>
+      </div>
     </div>
   </section>
 
@@ -519,9 +754,11 @@ week's dominant mood archetype using XGBoost + SHAP.`,
       <div class="band-label"><div class="band-title">Contact</div></div>
       <div class="band-body">
         <a class="contact-mail" id="contact-mail" href="#"></a>
+        <p class="contact-sub" id="contact-sub"></p>
         <div class="contact-links">
-          <a class="link" id="c-github" href="#" target="_blank" rel="noopener">GitHub</a>
           <a class="link" id="c-linkedin" href="#" target="_blank" rel="noopener">LinkedIn</a>
+          <a class="link" id="c-github" href="#" target="_blank" rel="noopener">GitHub</a>
+          <a class="link" id="c-resume" href="#" style="display:none;">Download résumé (PDF)</a>
         </div>
       </div>
     </div>
@@ -558,40 +795,63 @@ week's dominant mood archetype using XGBoost + SHAP.`,
   const def  = (k, v) => `<div class="def"><div class="k">${k}</div><div class="def-v">${v}</div></div>`;
   /* plain comma list. Commas wrap on their own and read like writing. */
   const list = arr => arr.join(", ");
-  const ext  = (href, text) => `<a class="link" href="${href}" target="_blank" rel="noopener">${text}</a>`;
+  const ext  = (href, text, cls) => `<a class="link${cls ? " " + cls : ""}" href="${href}" target="_blank" rel="noopener">${text}</a>`;
 
-  /* "End-to-End Data Specialist with experience across..." -> the job title alone */
-  const shortRole = PROFILE.title.split(/\s+with\s+/i)[0].replace(/[.,]\s*$/, "");
-  const initials  = PROFILE.name.split(/\s+/).filter(Boolean).map(w => w[0]).slice(0,2).join("").toUpperCase();
+  const initials = PROFILE.name.split(/\s+/).filter(Boolean).map(w => w[0]).slice(0,2).join("").toUpperCase();
 
   $("nav-name").textContent     = PROFILE.name;
-  $("nav-role").textContent     = shortRole;
+  $("nav-role").textContent     = PROFILE.role;
   $("hero-name").textContent    = PROFILE.name;
   $("hero-tagline").textContent = PROFILE.tagline;
   $("hero-role").textContent    = PROFILE.title;
   $("portrait-ph").textContent  = initials;
-  document.title = PROFILE.name + ", " + shortRole;
+  document.title = PROFILE.name + " — " + PROFILE.role;
 
-  $("specbar").innerHTML = `
+  /* the two things a hiring manager wants within one click */
+  const heroCta = [ext("mailto:" + PROFILE.email, "Get in touch", "link--strong")];
+  if (PROFILE.resume) heroCta.push(ext(PROFILE.resume, "Download résumé (PDF)"));
+  heroCta.push(`<a class="link" href="#experience">See the work history</a>`);
+  $("hero-cta").innerHTML = heroCta.join("");
+
+  /* spec strip: the editable facts, then the fixed contact cells */
+  $("specbar").innerHTML =
+    PROFILE.facts.map(f => `<div><div class="k">${f.k}</div><div class="v">${f.v}</div></div>`).join("") + `
     <div><div class="k">Based in</div><div class="v">${PROFILE.location}</div></div>
     <div><div class="k">Status</div><div class="v"><span class="open-dot">&bull;</span> Available for work</div></div>
     <div><div class="k">Email</div><div class="v"><a href="mailto:${PROFILE.email}">${PROFILE.email}</a></div></div>
     <div><div class="k">Elsewhere</div><div class="v">
-      <a href="${PROFILE.github}" target="_blank" rel="noopener">GitHub</a>,
-      <a href="${PROFILE.linkedin}" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="${PROFILE.linkedin}" target="_blank" rel="noopener">LinkedIn</a>,
+      <a href="${PROFILE.github}" target="_blank" rel="noopener">GitHub</a>
     </div></div>`;
 
   $("about-text").textContent = PROFILE.about;
   $("about-facts").innerHTML =
+    def("Education", PROFILE.education
+          .map(e => `${e.what} <span class="muted">— ${e.where}, ${e.when}</span>`).join("<br />")) +
+    def("Certifications", PROFILE.certifications
+          .map(c => `${c.what} <span class="muted">(${c.when})</span>`).join("<br />")) +
     def("Languages", PROFILE.languages
           .map(l => `${l.name} <span class="muted">(${l.level})</span>`).join(", ")) +
     def("Off the clock", list(PROFILE.hobbies.map(h => h.label)));
+
+  $("metrics").innerHTML = PROFILE.metrics
+    .map(m => `<div><div class="metric-n">${m.n}</div><div class="metric-l">${m.l}</div></div>`).join("");
+
+  $("experience-list").innerHTML = PROFILE.experience.map(r => `
+    <article class="role">
+      <div class="role-head">
+        <h3 class="role-title">${r.title} <span class="at">— ${r.org}</span></h3>
+        <div class="role-when">${r.when}<span class="mode">${r.mode}</span></div>
+      </div>
+      <ul class="role-pts">${r.points.map(p => `<li>${p}</li>`).join("")}</ul>
+      <p class="role-tools">${list(r.tools)}</p>
+    </article>`).join("");
 
   $("skills-list").innerHTML = Object.entries(PROFILE.skills)
     .map(([group, tags]) => def(group, list(tags))).join("");
 
   $("work-list").innerHTML = PROFILE.projects.map(p => {
-    const isLive = p.badge === "Live" || p.badge === "In Production";
+    const isLive = p.badge !== "In Progress";
     const live   = p.link && p.link !== "#";
     const links  = [];
     links.push(live ? ext(p.link, p.label) : `<span class="link is-off">${p.label}</span>`);
@@ -639,8 +899,15 @@ week's dominant mood archetype using XGBoost + SHAP.`,
   const cm = $("contact-mail");
   cm.textContent = PROFILE.email;
   cm.href = "mailto:" + PROFILE.email;
+  $("contact-sub").textContent =
+    PROFILE.phone + " · " + PROFILE.location + " · open to remote and hybrid analytics roles.";
   $("c-github").href   = PROFILE.github;
   $("c-linkedin").href = PROFILE.linkedin;
+  if (PROFILE.resume) {
+    const r = $("c-resume");
+    r.href = PROFILE.resume;
+    r.style.display = "";
+  }
   $("foot-name").textContent = "© " + PROFILE.name;
   $("foot-year").textContent = new Date().getFullYear();
 
