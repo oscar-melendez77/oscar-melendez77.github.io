@@ -276,10 +276,36 @@ arrangements, recorded at home in one take.`,
     },
 
     /* ── Side projects ────────────────────────────────────────
-       Dashboard-first: the two with a live dashboard lead, because
-       that is what an analytics reader wants to click.
+       CHAN-C leads: it is the one in production, with two shipped
+       surfaces and a round being raised. The two live dashboards
+       follow, then the in-progress build.
     ──────────────────────────────────────────────────────── */
     projects: [
+      {
+        name:        "CHAN-C",
+        badge:       "In Production",
+        description: `A WhatsApp-first, commission-based marketplace formalizing Guatemala's informal
+construction labor market — connecting vetted plumbers, electricians, carpenters and masons with
+companies and homeowners. Two live front doors are built and running: the WhatsApp line workers and
+hirers actually use, and a companion app for onboarding, verification and job tracking. Now raising
+a first round of investment. Sole technical lead across architecture, backend, the routing engine,
+the operator dashboard and the app. Co-founder Cecilia L. leads art & design.`,
+        highlights: [
+          "Two shipped surfaces: a live WhatsApp line and a companion app, on one shared backend",
+          "Operator dashboard for live supervision: worker/hirer verification, payment-receipt review, deal monitoring",
+          "Three-line A/B/C routing on the Meta WhatsApp Cloud API with a typed, stateful deal-flow engine",
+          "Escrow + tiered commission engine driven by a four-rung worker reputation ladder",
+          "Deterministic sim/verify harness with SQL⇔in-memory parity checks on every data path",
+        ],
+        link:  "https://wa.me/50252433020",
+        label: "Chat on WhatsApp",
+        // A second product link, rendered right after the primary one. Delete the
+        // two lines and the button disappears.
+        appLink:  "https://app.chan-c.com.gt",
+        appLabel: "Open the App",
+        archLink: "chan-c-architecture.html",
+        tags:  ["Python", "SQL", "FastAPI", "Supabase/Postgres", "Next.js", "React Native", "WhatsApp Cloud API", "Claude"],
+      },
       {
         name:        "SoundPulse — PulseIQ",
         badge:       "Live Dashboard",
@@ -318,24 +344,6 @@ from a retrieval layer grounded in the same four sources.`,
         repo:     "https://github.com/oscar-melendez77/PharmaWatch",
         archLink: "pharmawatch-architecture.html",
         tags:  ["SQL", "Python", "BigQuery", "dbt", "LightGBM", "SHAP", "MLflow", "ChromaDB", "LangChain", "FastAPI"],
-      },
-      {
-        name:        "CHAN-C",
-        badge:       "In Production",
-        description: `A WhatsApp-first, commission-based marketplace formalizing Guatemala's informal
-construction labor market — connecting vetted plumbers, electricians, carpenters and masons with
-companies and homeowners. Sole technical lead across architecture, backend, the routing engine, the
-operator dashboard and the mobile app. Co-founder Cecilia L. leads art & design.`,
-        highlights: [
-          "Operator dashboard for live supervision: worker/hirer verification, payment-receipt review, deal monitoring",
-          "Three-line A/B/C routing on the Meta WhatsApp Cloud API with a typed, stateful deal-flow engine",
-          "Escrow + tiered commission engine driven by a four-rung worker reputation ladder",
-          "Deterministic sim/verify harness with SQL⇔in-memory parity checks on every data path",
-        ],
-        link:  "https://wa.me/50252433020",
-        label: "Chat on WhatsApp",
-        archLink: "chan-c-architecture.html",
-        tags:  ["Python", "SQL", "FastAPI", "Supabase/Postgres", "Next.js", "React Native", "WhatsApp Cloud API", "Claude"],
       },
       {
         name:        "Más Watts",
@@ -858,6 +866,7 @@ Cecilia L. leads art & design).`,
     if (p.waEnc) links.push(
       `<button type="button" class="link wa-locked" data-salt="${p.waEnc.salt}" data-iv="${p.waEnc.iv}"
         data-ct="${p.waEnc.ct}">Chat on WhatsApp</button>`);
+    if (p.appLink)  links.push(ext(p.appLink, p.appLabel || "Open the App"));
     if (p.repo)     links.push(ext(p.repo, "View Repository"));
     if (p.archLink) links.push(ext(p.archLink, "Architecture"));
 
