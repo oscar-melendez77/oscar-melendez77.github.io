@@ -170,10 +170,6 @@ public dataset, build the pipeline, and ship the dashboard.`,
       { what: "B.S. Industrial Engineering", where: "Universidad del Valle de Guatemala", when: "2010 — 2015" },
     ],
 
-    certifications: [
-      { what: "Microsoft Certified: Fabric Data Engineer Associate (DP-700)", when: "Aug 2026" },
-    ],
-
     /* ── Skills ───────────────────────────────────────────────
        Ordered the way a hiring manager reads: analysis first,
        then SQL, then the dashboards, then everything else.
@@ -836,8 +832,6 @@ Cecilia L. leads art & design).`,
   $("about-facts").innerHTML =
     def("Education", PROFILE.education
           .map(e => `${e.what} <span class="muted">— ${e.where}, ${e.when}</span>`).join("<br />")) +
-    def("Certifications", PROFILE.certifications
-          .map(c => `${c.what} <span class="muted">(${c.when})</span>`).join("<br />")) +
     def("Languages", PROFILE.languages
           .map(l => `${l.name} <span class="muted">(${l.level})</span>`).join(", ")) +
     def("Off the clock", list(PROFILE.hobbies.map(h => h.label)));
