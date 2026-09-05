@@ -281,16 +281,19 @@ arrangements, recorded at home in one take.`,
         name:        "CHAN-C",
         badge:       "In Production",
         description: `A WhatsApp-first, commission-based marketplace formalizing Guatemala's informal
-construction labor market — connecting vetted plumbers, electricians, carpenters and masons with
-companies and homeowners. Two live front doors are built and running: the WhatsApp line workers and
-hirers actually use, and a companion app for onboarding, verification and job tracking. Now raising
-a first round of investment. Sole technical lead across architecture, backend, the routing engine,
-the operator dashboard and the app. Co-founder Cecilia L. leads art & design.`,
+construction labor market — connecting vetted plumbers, electricians, carpenters and masons with the
+companies and homeowners who need them. Workers set their own price in a reverse-auction instead of a
+platform-fixed rate card, and CHAN-C earns its commission only once a job actually locks. Two live
+front doors run on one shared backend: the WhatsApp line workers and hirers use every day, and a
+companion app for onboarding, verification and job tracking. Now raising a first round. Sole
+technical lead across architecture, backend, the deal-flow engine, the operator dashboard and the
+app. Co-founder Cecilia L. leads art & design.`,
         highlights: [
-          "Two shipped surfaces: a live WhatsApp line and a companion app, on one shared backend",
-          "Operator dashboard for live supervision: worker/hirer verification, payment-receipt review, deal monitoring",
-          "Three-line A/B/C routing on the Meta WhatsApp Cloud API with a typed, stateful deal-flow engine",
-          "Escrow + tiered commission engine driven by a four-rung worker reputation ladder",
+          "Reverse-auction bidding: workers price their own labor instead of taking a fixed rate card",
+          "Masked anti-poaching relay hides contact info until a job locks, so the commission can't be routed around",
+          "Atomic deal lock (INSERT…RETURNING) makes double-booking the same job impossible under concurrent bids",
+          "WhatsApp Flows handle the deal lock and payment-proof upload natively — no redirect off the chat",
+          "Escrow held on a 50% anticipo before contact is ever revealed, gated by a four-rung reputation ladder",
           "Deterministic sim/verify harness with SQL⇔in-memory parity checks on every data path",
         ],
         link:  "https://wa.me/50252433020",
@@ -717,8 +720,9 @@ Cecilia L. leads art & design).`,
       <div class="band-label"><div class="band-title">Selected projects</div></div>
       <div class="band-body">
         <p class="work-intro">
-          Built outside of work, on my own time, to keep the analysis muscles honest: each one takes a
-          messy public dataset all the way from ingestion to a dashboard someone can actually read.
+          CHAN-C is the venture — I'm building it full-time as sole technical lead. The three builds
+          beneath it are on my own time, each one taking a messy public dataset all the way from
+          ingestion to a dashboard someone can actually read.
         </p>
         <div id="work-list"></div>
       </div>
