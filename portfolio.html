@@ -567,7 +567,10 @@ Cecilia L. leads art & design).`,
     .work-stack { font-size: .75rem; color: var(--ink-2); margin-top: 1.2rem; line-height: 1.7; }
     .work-links { margin-top: 1.3rem; display: flex; flex-wrap: wrap; gap: 1.5rem; }
     .work-intro { font-size: .875rem; color: var(--ink-2); max-width: 62ch; margin-bottom: 2.25rem; }
-    .work-video { margin-top: 1.4rem; }
+    /* 320px on purpose: YouTube only shows a video's cover while the player is at most
+       640 physical pixels wide, which is 320px on a 2x screen. Wider shows a grey box
+       until YouTube has made the video's largest thumbnail. */
+    .work-video { margin-top: 1.4rem; max-width: 320px; }
 
     /* ── music ───────────────────────────────────────────── */
     .music { display: grid; grid-template-columns: minmax(0,1.55fr) minmax(0,1fr); gap: 2.5rem; }
