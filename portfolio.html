@@ -288,6 +288,11 @@ front doors run on one shared backend: the WhatsApp line workers and hirers use 
 companion app for onboarding, verification and job tracking. Now raising a first round. Sole
 technical lead across architecture, backend, the deal-flow engine, the operator dashboard and the
 app. Co-founder Cecilia L. leads art & design.`,
+        // video: a YouTube video shown under the description. Put the code after
+        // "youtu.be/" (or after "watch?v=") here. Delete the two lines and the
+        // player disappears. It is the unlisted English pitch on the chan-C channel.
+        video:      "aVTXGZueEgE",
+        videoTitle: "CHAN-C pitch (English)",
         highlights: [
           "Reverse-auction bidding: workers price their own labor instead of taking a fixed rate card",
           "Masked anti-poaching relay hides contact info until a job locks, so the commission can't be routed around",
@@ -562,6 +567,7 @@ Cecilia L. leads art & design).`,
     .work-stack { font-size: .75rem; color: var(--ink-2); margin-top: 1.2rem; line-height: 1.7; }
     .work-links { margin-top: 1.3rem; display: flex; flex-wrap: wrap; gap: 1.5rem; }
     .work-intro { font-size: .875rem; color: var(--ink-2); max-width: 62ch; margin-bottom: 2.25rem; }
+    .work-video { margin-top: 1.4rem; }
 
     /* ── music ───────────────────────────────────────────── */
     .music { display: grid; grid-template-columns: minmax(0,1.55fr) minmax(0,1fr); gap: 2.5rem; }
@@ -640,7 +646,7 @@ Cecilia L. leads art & design).`,
       * { transition: none !important; }
     }
     @media print {
-      .topbar, .music, .wa-modal, .masthead-aside { display: none !important; }
+      .topbar, .music, .work-video, .wa-modal, .masthead-aside { display: none !important; }
       body { background: #fff; }
       .band { padding: 1.5rem 0; break-inside: avoid; }
       .role, .work { break-inside: avoid; }
@@ -868,13 +874,22 @@ Cecilia L. leads art & design).`,
     if (p.repo)     links.push(ext(p.repo, "View Repository"));
     if (p.archLink) links.push(ext(p.archLink, "Architecture"));
 
+    // Same player frame as the music section; nocookie host, and nothing loads
+    // until the card scrolls near the screen.
+    const video = p.video ? `
+        <div class="tube-frame work-video">
+          <iframe src="https://www.youtube-nocookie.com/embed/${p.video}?rel=0" title="${p.videoTitle || p.name}"
+                  loading="lazy" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"
+                  allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe>
+        </div>` : "";
+
     return `
       <article class="work">
         <div class="work-head">
           <h3 class="work-name">${p.name}</h3>
           <span class="work-status${isLive ? " is-live" : ""}">${p.badge}</span>
         </div>
-        <p class="work-desc">${p.description}</p>
+        <p class="work-desc">${p.description}</p>${video}
         <ul class="work-hl">${p.highlights.map(h => `<li>${h}</li>`).join("")}</ul>
         <p class="work-stack">${list(p.tags)}</p>
         <p class="work-links">${links.join("")}</p>
