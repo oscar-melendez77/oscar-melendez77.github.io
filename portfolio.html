@@ -311,6 +311,27 @@ app. Co-founder Cecilia L. leads art & design.`,
         tags:  ["Python", "SQL", "FastAPI", "Supabase/Postgres", "Next.js", "React Native", "WhatsApp Cloud API", "Claude"],
       },
       {
+        name:        "Football RAG — Matchday Assistant",
+        badge:       "Live Demo",
+        description: `A bilingual (English/Spanish) football assistant that answers questions like
+"How does Real Madrid arrive at their next match?" with grounded, cited answers. Six daily sources
+flow through an Airflow + dbt medallion lakehouse in BigQuery; the assistant blends hard facts
+(results, standings, injuries, betting-market odds) with semantically retrieved news, and every
+claim cites where it came from. Runs 24/7 on a free cloud VM — total cost: $0/month.`,
+        highlights: [
+          "6 sources (football-data.org, FPL, The Odds API, Guardian, RSS, Wikipedia/Wikidata) ingested daily → GCS → BigQuery bronze/silver/gold",
+          "Airflow 3 with data-aware scheduling: ingestion DAGs publish Assets that trigger dbt build → embeddings → entity tagging",
+          "dbt models with SCD2 player-availability history, 40+ tests, and seed-driven entity resolution for team aliases",
+          "Multilingual e5 embeddings + BigQuery VECTOR_SEARCH with team pre-filtering; retrieval scored with hit@5, P@5 and MRR on a 30-question eval set",
+          "Facts-first grounding: structured tables are injected as citable [F] facts so the LLM never invents scores, positions or odds",
+          "FastAPI app with rate limiting, daily LLM cap and caching, served publicly via Tailscale Funnel from an Oracle Always Free ARM VM",
+        ],
+        link:  "https://football-rag.tail9198fe.ts.net/",
+        label: "Try the Assistant",
+        repo:  "https://github.com/oscar-melendez77/football-rag",
+        tags:  ["Python", "SQL", "Airflow", "dbt", "BigQuery", "Vector Search", "RAG", "LLM (Groq)", "FastAPI", "Terraform", "Docker", "GCP", "Oracle Cloud"],
+      },
+      {
         name:        "SoundPulse — PulseIQ",
         badge:       "Live Dashboard",
         description: `An analytics platform that asks whether the mood of the news shows up in the
@@ -729,7 +750,7 @@ Cecilia L. leads art & design).`,
       <div class="band-label"><div class="band-title">Selected projects</div></div>
       <div class="band-body">
         <p class="work-intro">
-          CHAN-C is the venture — I'm building it full-time as sole technical lead. The three builds
+          CHAN-C is the venture — I'm building it full-time as sole technical lead. The builds
           beneath it are on my own time, each one taking a messy public dataset all the way from
           ingestion to a dashboard someone can actually read.
         </p>
