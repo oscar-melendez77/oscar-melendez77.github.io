@@ -307,6 +307,9 @@ app. Co-founder Cecilia L. leads art & design.`,
         // two lines and the button disappears.
         appLink:  "https://app.chan-c.com.gt",
         appLabel: "Open the App",
+        // The Google Play listing, drawn as Google's own badge (google-play-badge.png, the Spanish one,
+        // since the app is in Spanish). Delete the line and the badge disappears.
+        playLink: "https://play.google.com/store/apps/details?id=gt.com.chanc.app",
         archLink: "chan-c-architecture.html",
         tags:  ["Python", "SQL", "FastAPI", "Supabase/Postgres", "Next.js", "React Native", "WhatsApp Cloud API", "Claude"],
       },
@@ -675,6 +678,9 @@ Cecilia L. leads art & design).`,
       .band { padding: 1.5rem 0; break-inside: avoid; }
       .role, .work { break-inside: avoid; }
     }
+    /* Google Play's own badge, unmodified, sized like the buttons beside it. */
+    .play-badge { display: inline-flex; align-items: center; line-height: 0; }
+    .play-badge img { height: 44px; width: auto; display: block; }
   </style>
 </head>
 <body>
@@ -895,6 +901,8 @@ Cecilia L. leads art & design).`,
       `<button type="button" class="link wa-locked" data-salt="${p.waEnc.salt}" data-iv="${p.waEnc.iv}"
         data-ct="${p.waEnc.ct}">Chat on WhatsApp</button>`);
     if (p.appLink)  links.push(ext(p.appLink, p.appLabel || "Open the App"));
+    if (p.playLink) links.push(`<a class="play-badge" href="${p.playLink}" target="_blank" rel="noopener"
+        aria-label="Disponible en Google Play"><img src="google-play-badge.png" alt="Disponible en Google Play"></a>`);
     if (p.repo)     links.push(ext(p.repo, "View Repository"));
     if (p.archLink) links.push(ext(p.archLink, "Architecture"));
 
