@@ -280,37 +280,42 @@ arrangements, recorded at home in one take.`,
       {
         name:        "CHAN-C",
         badge:       "In Production",
-        description: `A WhatsApp-first, commission-based marketplace formalizing Guatemala's informal
-construction labor market — connecting vetted plumbers, electricians, carpenters and masons with the
-companies and homeowners who need them. Workers set their own price in a reverse-auction instead of a
-platform-fixed rate card, and CHAN-C earns its commission only once a job actually locks. Two live
-front doors run on one shared backend: the WhatsApp line workers and hirers use every day, and a
-companion app for onboarding, verification and job tracking. Now raising a first round. Sole
-technical lead across architecture, backend, the deal-flow engine, the operator dashboard and the
-app. Co-founder Cecilia L. leads art & design.`,
+        description: `A commission-based marketplace formalizing Guatemala's informal construction labor
+market — connecting verified masons, electricians, plumbers and other trades with the homeowners and
+companies who need them. Two channels run on one shared backend: WhatsApp first, where workers and
+clients do everything in a chat with Don Lorenzo, CHAN-C's assistant; and the app as the second
+channel (web, and Android on Google Play) to publish jobs, compare quotes, follow the work with
+photos and pay. Workers set their own price instead of taking a fixed rate card; phone numbers are
+never shared; every deal gets a written agreement both sides accept; and the client pays in two
+halves, with a 10% commission on top, so the worker keeps 100% of their price. Live in Guatemala
+City, with more departments next. Now raising a first round. Sole technical lead across
+architecture, backend, the deal-flow engine, the operator dashboard and the app. Co-founder
+Cecilia L. leads art & design.`,
         // video: a YouTube video shown under the description. Put the code after
         // "youtu.be/" (or after "watch?v=") here. Delete the two lines and the
         // player disappears. It is the unlisted English pitch on the chan-C channel.
         video:      "aVTXGZueEgE",
         videoTitle: "CHAN-C pitch (English)",
         highlights: [
-          "Reverse-auction bidding: workers price their own labor instead of taking a fixed rate card",
-          "Masked anti-poaching relay hides contact info until a job locks, so the commission can't be routed around",
+          "Two channels, one backend: WhatsApp first, the app (web + Android) second — same jobs, quotes and deal state on both",
+          "Reverse-auction bidding: workers accept, counter-offer or pass instead of taking a fixed rate card",
+          "Masked chat relay: a phone number typed in the chat reaches the other side as \"número oculto\", so the commission can't be routed around",
           "Atomic deal lock (INSERT…RETURNING) makes double-booking the same job impossible under concurrent bids",
+          "Two-stage escrow — half to start, half on completion — with a written agreement both sides accept, delivered as a PDF",
+          "Worker verification: ID front and back plus a selfie holding it, reviewed by the team before any job arrives",
           "WhatsApp Flows handle the deal lock and payment-proof upload natively — no redirect off the chat",
-          "Escrow held on a 50% anticipo before contact is ever revealed, gated by a four-rung reputation ladder",
           "Deterministic sim/verify harness with SQL⇔in-memory parity checks on every data path",
         ],
-        link:  "https://wa.me/50252433020",
-        label: "Chat on WhatsApp",
-        // A second product link, rendered right after the primary one. Delete the
+        // The three doors, in this order: the website, WhatsApp, Google Play.
+        link:  "https://chan-c.com.gt",
+        label: "Website",
+        // A second link, rendered right after the primary one. Delete the
         // two lines and the button disappears.
-        appLink:  "https://app.chan-c.com.gt",
-        appLabel: "Open the App",
+        appLink:  "https://wa.me/50252433020",
+        appLabel: "Chat on WhatsApp",
         // The Google Play listing, drawn as Google's own badge (google-play-badge.png, the Spanish one,
         // since the app is in Spanish). Delete the line and the badge disappears.
         playLink: "https://play.google.com/store/apps/details?id=gt.com.chanc.app",
-        archLink: "chan-c-architecture.html",
         tags:  ["Python", "SQL", "FastAPI", "Supabase/Postgres", "Next.js", "React Native", "WhatsApp Cloud API", "Claude"],
       },
       {
