@@ -360,6 +360,26 @@ forward-looking call on next week's dominant mood.`,
         tags:  ["SQL", "Python", "BigQuery", "dbt", "Prefect", "XGBoost", "SHAP", "NLP", "GCP"],
       },
       {
+        name:        "Movie Pipeline — Find That Movie",
+        badge:       "Live Demo",
+        description: `A semantic movie search: describe a plot in your own words — "a boy discovers
+he is a wizard and goes to a magic school" — and get the most likely films back, with the passage
+that matched. ~2,600 films (2000–2025) from TMDB, enriched with full Wikipedia plots, flow through
+DuckDB and dbt into chunked embeddings searched by cosine similarity. A daily check refreshes the
+data only when new releases appear — total cost: $0/month.`,
+        highlights: [
+          "Idempotent, incremental extraction from TMDB + Wikipedia (matched via Wikidata IDs), with retries, backoff and raw JSON landed unchanged",
+          "DuckDB as a zero-server warehouse; dbt staging → mart models cut the Plot section out of each Wikipedia page, with uniqueness/not-null tests",
+          "Every word is searchable: plots split into 150-word overlapping chunks (~15k) embedded with BGE-small; a film scores by the average of its 3 best chunks",
+          "Event-driven GitHub Actions: a 1-minute daily check compares TMDB with known IDs and runs the full refresh only when there are new movies",
+          "Data versioned on a Hugging Face dataset; Streamlit Community Cloud app picks up the new database automatically",
+        ],
+        link:  "https://movie-pipeline.streamlit.app/",
+        label: "Try the Search",
+        repo:  "https://github.com/oscar-melendez77/movie-pipeline",
+        tags:  ["Python", "SQL", "DuckDB", "dbt", "Embeddings", "Semantic Search", "sentence-transformers", "GitHub Actions", "Hugging Face", "Streamlit"],
+      },
+      {
         name:        "PharmaWatch",
         badge:       "Live Dashboard",
         description: `A drug-risk dashboard that joins adverse-event reports, medical research, drug
