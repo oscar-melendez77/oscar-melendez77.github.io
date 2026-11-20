@@ -340,26 +340,6 @@ claim cites where it came from. Runs 24/7 on a free cloud VM — total cost: $0/
         tags:  ["Python", "SQL", "Airflow", "dbt", "BigQuery", "Vector Search", "RAG", "LLM (Groq)", "FastAPI", "Terraform", "Docker", "GCP", "Oracle Cloud"],
       },
       {
-        name:        "SoundPulse — PulseIQ",
-        badge:       "Live Dashboard",
-        description: `An analytics platform that asks whether the mood of the news shows up in the
-music people stream. Ingests 8 daily sources, scores news emotion with DistilRoBERTa, clusters
-audio into mood archetypes, and reports the correlation on a public dashboard — plus a
-forward-looking call on next week's dominant mood.`,
-        highlights: [
-          "Correlation analysis: 10 emotion scores × 5 mood archetypes, reported with Pearson r",
-          "30 audio features engineered across 13 weeks of Billboard charts",
-          "Automated daily pipeline: 8 ingestion modules → dbt models in BigQuery → published dashboard",
-          "XGBoost lag-1 predictor with SHAP, so every call comes with the drivers behind it",
-        ],
-        link:  "https://oscar-melendez77.github.io/soundpulse-pipeline/",
-        label: "View Dashboard",
-        // repo: add this line to any project to get a "View Repository" button.
-        // Delete the line and the button disappears.
-        repo:  "https://github.com/oscar-melendez77/soundpulse-pipeline",
-        tags:  ["SQL", "Python", "BigQuery", "dbt", "Prefect", "XGBoost", "SHAP", "NLP", "GCP"],
-      },
-      {
         name:        "Movie Pipeline — Find That Movie",
         badge:       "Live Demo",
         description: `A semantic movie search: describe a plot in your own words — "a boy discovers
@@ -378,6 +358,26 @@ data only when new releases appear — total cost: $0/month.`,
         label: "Try the Search",
         repo:  "https://github.com/oscar-melendez77/movie-pipeline",
         tags:  ["Python", "SQL", "DuckDB", "dbt", "Embeddings", "Semantic Search", "sentence-transformers", "GitHub Actions", "Hugging Face", "Streamlit"],
+      },
+      {
+        name:        "SoundPulse — PulseIQ",
+        badge:       "Live Dashboard",
+        description: `An analytics platform that asks whether the mood of the news shows up in the
+music people stream. Ingests 8 daily sources, scores news emotion with DistilRoBERTa, clusters
+audio into mood archetypes, and reports the correlation on a public dashboard — plus a
+forward-looking call on next week's dominant mood.`,
+        highlights: [
+          "Correlation analysis: 10 emotion scores × 5 mood archetypes, reported with Pearson r",
+          "30 audio features engineered across 13 weeks of Billboard charts",
+          "Automated daily pipeline: 8 ingestion modules → dbt models in BigQuery → published dashboard",
+          "XGBoost lag-1 predictor with SHAP, so every call comes with the drivers behind it",
+        ],
+        link:  "https://oscar-melendez77.github.io/soundpulse-pipeline/",
+        label: "View Dashboard",
+        // repo: add this line to any project to get a "View Repository" button.
+        // Delete the line and the button disappears.
+        repo:  "https://github.com/oscar-melendez77/soundpulse-pipeline",
+        tags:  ["SQL", "Python", "BigQuery", "dbt", "Prefect", "XGBoost", "SHAP", "NLP", "GCP"],
       },
       {
         name:        "PharmaWatch",
